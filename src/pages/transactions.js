@@ -1,21 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/header.js";
+import StatsCard from "../components/statscard.js";
 import RequestPayment from "../components/requestpayment.js";
-import GreenStatsCard from "../components/greenstatscard.js";
-import profilecard from "../assets/profilecard.svg";
 import greaterthan from "../assets/greaterthan.svg";
 
 const Container = styled.div`
   text-align: center;
   margin: 0;
-`;
-
-const ProfileCard = styled.img`
-  margin: 0;
-  margin-top: -30px;
+  margin-top: -60px;
   background: white;
-  width: 90%;
+  padding-top: 8%;
 `;
 
 const Leads = styled.div`
@@ -47,16 +42,15 @@ const Leads = styled.div`
   }
 `;
 
-const Overview = () => {
+const Transactions = () => {
   return (
     <>
+      <Header title="Transactions" />
       <Container>
-        <Header title="Overview" />
-        <ProfileCard src={profilecard} alt="profile card" />
         <RequestPayment />
-        <GreenStatsCard received={1000} pending={2000} />
+        <StatsCard received={2000} pending={2000} />
         <Leads>
-          <h4>Leads</h4>
+          <h4>Transactions</h4>
           <ul>
             <li>
               <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
@@ -71,4 +65,4 @@ const Overview = () => {
   );
 };
 
-export default Overview;
+export default Transactions;

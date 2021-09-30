@@ -1,8 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import clock from "../assets/clock.svg";
+import greenarrow from "../assets/greenarrow.svg";
 
 const Container = styled.div`
-  background: white;
+  background: #f0fafa;
   margin: 5% auto;
   padding: 20px 0;
   width: 90%;
@@ -14,7 +17,6 @@ const Container = styled.div`
     div {
       font-family: Roboto;
       color: #838383;
-      border: 1px solid #bbbbbb;
       line-height: 0.5;
       padding: 2% 5%;
       text-align: left;
@@ -33,9 +35,29 @@ const Container = styled.div`
       }
     }
   }
+
+  .invoice {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+
+    p {
+      margin: 0;
+      font-size: inherit;
+      font-family: Poppins;
+    }
+    a {
+      text-decoration: none;
+      color: #489f9f;
+    }
+  }
 `;
 
-const StatsCard = ({ received, pending }) => {
+const GreenStatsCard = ({ received, pending }) => {
   return (
     <>
       <Container>
@@ -49,9 +71,16 @@ const StatsCard = ({ received, pending }) => {
             <p>NGN {pending}</p>
           </div>
         </span>
+        <div className="invoice">
+          <img src={clock} alt="clock icon" />
+          <p>
+            <Link to="/">View all Invoices</Link>
+          </p>
+          <img src={greenarrow} alt="forward icon" />
+        </div>
       </Container>
     </>
   );
 };
 
-export default StatsCard;
+export default GreenStatsCard;

@@ -106,7 +106,7 @@ const Header = ({ title }) => {
           <Link to="/overview">Overview</Link>
         </li>
         <li>
-          <Link to="/">Transactions</Link>
+          <Link to="/transactions">Transactions</Link>
         </li>
         <li>
           <Link to="/settings">Settings</Link>
