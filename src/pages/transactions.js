@@ -24,6 +24,24 @@ const Leads = styled.div`
   h4 {
     text-align: left;
   }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .options {
+      outline: none;
+      margin: 0;
+      width: 40%;
+      height: 40px;
+      padding: 0 10px;
+      border-radius: 4px;
+      color: #489f9f;
+      border: 1px solid #eeeeee;
+      background: white;
+    }
+  }
   ul {
     width: 100%;
     padding: 0;
@@ -50,7 +68,14 @@ const Transactions = () => {
         <RequestPayment />
         <StatsCard received={2000} pending={2000} />
         <Leads>
-          <h4>Transactions</h4>
+          <span>
+            <h4>Transactions</h4>
+            <select name="options" className="options">
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+            </select>
+          </span>
+
           <ul>
             <li>
               <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
