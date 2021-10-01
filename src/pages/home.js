@@ -91,7 +91,7 @@ const Home = () => {
         </p>
         <br />
         <h6>start selling with us</h6>
-        <Link to="/overview">
+        <Link to="/subscribe">
           <GoogleLogin>
             <img src={google} alt="google logo" />
             <p>Sign in with Google</p>
