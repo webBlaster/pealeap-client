@@ -65,7 +65,7 @@ const Transactions = () => {
     <>
       <Header title="Transactions" />
       <Container>
-        <RequestPayment />
+        <RequestPayment title="Request a payment" />
         <StatsCard received={2000} pending={2000} />
         <Leads>
           <span>

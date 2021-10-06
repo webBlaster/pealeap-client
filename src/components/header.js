@@ -42,6 +42,7 @@ const Menu = styled.ul`
   height: 100vh;
   padding: 0;
   position: fixed;
+  z-index: 1000;
   top: 0;
   background: white;
   margin: 0;
@@ -96,7 +97,7 @@ const Header = ({ title }) => {
           </Link>
           <MenuIcon src={menu} alt="menu" onClick={toggleModal} />
         </div>
-        <h4>{title}</h4>
+        <h4>{title || ""}</h4>
       </Container>
       <Menu hidden={modal}>
         <li className="first-menu-item">

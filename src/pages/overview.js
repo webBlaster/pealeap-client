@@ -53,7 +53,7 @@ const Overview = () => {
       <Container>
         <Header title="Overview" />
         <ProfileCard src={profilecard} alt="profile card" />
-        <RequestPayment />
+        <RequestPayment title="Request a payment" />
         <GreenStatsCard received={1000} pending={2000} />
         <Leads>
           <h4>Leads</h4>

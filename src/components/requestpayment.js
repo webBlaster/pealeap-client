@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import forwardicon from "../assets/forwardicon.svg";
 
@@ -19,13 +20,23 @@ const Button = styled.button`
   }
 `;
 
-const RequestPayment = () => {
+const Container = styled.span`
+  a {
+    text-decoration: none;
+  }
+`;
+
+const RequestPayment = ({ title }) => {
   return (
     <>
-      <Button>
-        <p>Request a payment</p>
-        <img src={forwardicon} alt="go" />
-      </Button>
+      <Container>
+        <Link to="/create.invoice" className="link">
+          <Button>
+            <p>{title}</p>
+            <img src={forwardicon} alt="go" />
+          </Button>
+        </Link>
+      </Container>
     </>
   );
 };
