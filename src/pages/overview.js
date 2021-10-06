@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/header.js";
 import RequestPayment from "../components/requestpayment.js";
@@ -34,6 +35,10 @@ const Leads = styled.div`
     padding: 0;
     list-style-type: circle;
     color: #838383;
+    a {
+      text-decoration: none;
+      color: #838383;
+    }
     li {
       margin: 10px 0;
       padding: 0 5%;
@@ -58,12 +63,16 @@ const Overview = () => {
         <Leads>
           <h4>Leads</h4>
           <ul>
-            <li>
-              <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
-            </li>
-            <li>
-              <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
-            </li>
+            <Link to="/lead">
+              <li>
+                <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
+              </li>
+            </Link>
+            <Link to="/lead">
+              <li>
+                <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
+              </li>
+            </Link>
           </ul>
         </Leads>
       </Container>

@@ -12,6 +12,7 @@ import PaidInvoice from "./pages/paidinvoice.js";
 import PendingInvoice from "./pages/pendinginvoice.js";
 import Invoice from "./pages/invoice.js";
 import GiftFriends from "./pages/giftfriends.js";
+import Lead from "./pages/lead.js";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/pendinginvoice" exact component={PendingInvoice} />
         <Route path="/invoice" exact component={Invoice} />
         <Route path="/giftfriends" exact component={GiftFriends} />
+        <Route path="/lead" exact component={Lead} />
         <Route component={Home} />
       </Switch>
     </Router>
