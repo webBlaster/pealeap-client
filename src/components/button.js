@@ -12,6 +12,10 @@ const SubmitButton = styled.input`
   border-radius: 5px;
   font-size: 16px;
   color: white;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 700;
 `;
 
 const Submit = ({ text }) => {
