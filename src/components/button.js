@@ -6,8 +6,9 @@ const SubmitButton = styled.input`
   outline: none;
   margin: 0 auto;
   cursor: pointer;
+  border: none !important;
   background: #489f9f;
-  padding: 1% 5%;
+  padding: 5% 5%;
   border-radius: 5px;
   font-size: 16px;
   color: white;

@@ -1,14 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import pealeap from "../assets/pealeap.png";
 import Submit from "../components/button.js";
+import Header from "../components/header.js";
 
 const Container = styled.div`
   padding: 5%;
   text-align: center;
   background: #f0fafa;
   margin: 0;
+  margin-top: -80px;
   label {
     text-align: left !important;
     font-size: 15px;
@@ -37,10 +37,6 @@ const Container = styled.div`
   }
 `;
 
-const Logo = styled.img`
-  width: 25%;
-`;
-
 const CircleLogo = styled.div`
   position: relative;
   z-index: 2;
@@ -60,10 +56,8 @@ const CircleLogo = styled.div`
 const Settings = () => {
   return (
     <>
+      <Header title="" />
       <Container>
-        <Link to="/">
-          <Logo src={pealeap} alt="pealeap logo" />
-        </Link>
         <CircleLogo>
           <p>Logo</p>
         </CircleLogo>
