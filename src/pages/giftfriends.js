@@ -6,6 +6,11 @@ import Submit from "../components/button.js";
 
 const Container = styled.div`
   margin: 0;
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 
 const GreenTop = styled.div`

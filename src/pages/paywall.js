@@ -32,6 +32,11 @@ const Container = styled.div`
     line-height: 21px;
     margin-top: 0 !important;
   }
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 
 const Logo = styled.img`

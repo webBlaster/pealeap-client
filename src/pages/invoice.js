@@ -44,6 +44,11 @@ const Container = styled.div`
     border: 1px solid #838383;
     margin: 5% 0;
   }
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 const Note = styled.div`
   width: 90%;

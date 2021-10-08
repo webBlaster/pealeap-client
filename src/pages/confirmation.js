@@ -18,6 +18,11 @@ const Container = styled.div`
     width: 30%;
     margin: 30px auto;
   }
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 
 const Confirmation = () => {

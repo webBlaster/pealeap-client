@@ -43,6 +43,11 @@ const Container = styled.div`
   p {
     text-align: left;
   }
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 const Note = styled.div`
   width: 90%;
