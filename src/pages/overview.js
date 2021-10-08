@@ -10,6 +10,11 @@ import greaterthan from "../assets/greaterthan.svg";
 const Container = styled.div`
   text-align: center;
   margin: 0;
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 
 const ProfileCard = styled.img`
@@ -55,8 +60,8 @@ const Leads = styled.div`
 const Overview = () => {
   return (
     <>
+      <Header title="Overview" />
       <Container>
-        <Header title="Overview" />
         <ProfileCard src={profilecard} alt="profile card" />
         <RequestPayment title="Request a payment" />
         <GreenStatsCard received={1000} pending={2000} />

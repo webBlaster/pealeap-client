@@ -11,6 +11,11 @@ const Container = styled.div`
   margin-top: -60px;
   background: white;
   padding-top: 8%;
+
+  @media (min-width: 800px) {
+    width: 30%;
+    margin: 0 auto;
+  }
 `;
 
 const Leads = styled.div`
