@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { GoogleLogin as GoogleLoginComponent } from "react-google-login";
 import styled from "styled-components";
 import google from "../assets/google.png";
 import bottomcurve from "../assets/curvyshape.png";
@@ -32,6 +32,9 @@ const Container = styled.div`
 
   a {
     text-decoration: none;
+  }
+  .google {
+    display: none !important;
   }
 
   @media (min-width: 800px) {
@@ -189,6 +192,10 @@ const Pricing = styled.div`
 `;
 
 const Home = () => {
+  const googleButton = document.querySelector(".google");
+  const clickGoogleLogin = () => {
+    googleButton.click();
+  };
   return (
     <>
       <Container>
@@ -203,12 +210,24 @@ const Home = () => {
         </p>
         <br />
         <h6>start selling with us</h6>
-        <Link to="/subscribe">
-          <GoogleLogin>
-            <img src={google} alt="google logo" />
-            <p>Sign in with Google</p>
-          </GoogleLogin>
-        </Link>
+
+        <GoogleLogin onClick={clickGoogleLogin}>
+          <img src={google} alt="google logo" />
+          <p>Sign in with Google</p>
+        </GoogleLogin>
+
+        <GoogleLoginComponent
+          className="google"
+          clientId="13038225535-po09b2t18e5p9o9i79dimcgbjsuv9nfh.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={() => {
+            console.log("sucessful login");
+          }}
+          onFailure={() => {
+            console.log("failed login");
+          }}
+          cookiePolicy={"single_host_origin"}
+        />
       </Container>
       <SecondSection>
         <Video>
@@ -232,12 +251,11 @@ const Home = () => {
             </p>
             <br />
             <h6>start selling with us</h6>
-            <Link to="/subscribe">
-              <GoogleLogin>
-                <img src={google} alt="google logo" />
-                <p>Sign in with Google</p>
-              </GoogleLogin>
-            </Link>
+
+            <GoogleLogin onClick={clickGoogleLogin}>
+              <img src={google} alt="google logo" />
+              <p>Sign in with Google</p>
+            </GoogleLogin>
           </span>
 
           <Video>
