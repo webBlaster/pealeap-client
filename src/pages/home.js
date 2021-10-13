@@ -192,7 +192,7 @@ const Pricing = styled.div`
 `;
 
 const Home = () => {
-  const googleButton = document.querySelector(".google");
+  let googleButton = document.querySelector(".google");
   const clickGoogleLogin = () => {
     googleButton.click();
   };
