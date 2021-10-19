@@ -31,10 +31,16 @@ const Container = styled.div`
 
 const Logo = styled.img`
   width: 100%;
+  @media (min-width: 800px) {
+    width: 50%;
+  }
 `;
 
 const MenuIcon = styled.img`
   cursor: pointer;
+  @media (min-width: 800px) {
+    display: none !important;
+  }
 `;
 
 const Menu = styled.ul`
@@ -64,6 +70,10 @@ const Menu = styled.ul`
     color: inherit;
   }
 
+  a:hover {
+    color: #489f9f;
+  }
+
   .first-menu-item {
     padding-top: 6%;
     text-align: right;
@@ -78,6 +88,28 @@ const Menu = styled.ul`
 
   .active {
     color: #489f9f;
+  }
+`;
+
+const MobileMenu = styled.ul`
+  display: flex;
+  justify-content: space-evenly;
+  width: 34%;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+  }
+  a {
+    text-decoration: none;
+    color: #838383;
+  }
+  a:hover {
+    color: #489f9f;
+  }
+
+  @media (max-width: 800px) {
+    display: none !important;
   }
 `;
 
@@ -96,6 +128,17 @@ const Header = ({ title }) => {
             <Logo src={pealeap} alt="pealeap logo" />
           </Link>
           <MenuIcon src={menu} alt="menu" onClick={toggleModal} />
+          <MobileMenu>
+            <li>
+              <Link to="/overview">Overview</Link>
+            </li>
+            <li>
+              <Link to="/transactions">Transactions</Link>
+            </li>
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
+          </MobileMenu>
         </div>
         <h4>{title || ""}</h4>
       </Container>
