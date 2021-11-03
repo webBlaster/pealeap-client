@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import PrivateRoute from "./components/privateroute.js";
+import ResponseAlert from "./components/response.js";
 import Home from "./pages/home.js";
 import Overview from "./pages/overview.js";
 import Settings from "./pages/settings.js";
@@ -15,23 +18,80 @@ import GiftFriends from "./pages/giftfriends.js";
 import Lead from "./pages/lead.js";
 
 function App() {
+  let isAuthenticated = useSelector((state) => state.userAuth.isAuthenticated);
   return (
     <Router>
+      <ResponseAlert />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/subscribe" exact component={Subscribe} />
-        <Route path="/overview" exact component={Overview} />
-        <Route path="/settings" exact component={Settings} />
-        <Route path="/transactions" exact component={Transactions} />
-        <Route path="/create.invoice" exact component={CreateInvoice} />
-        <Route path="/paywall" exact component={Paywall} />
-        <Route path="/confirmation" exact component={Confirmation} />
-        <Route path="/paidinvoice" exact component={PaidInvoice} />
-        <Route path="/pendinginvoice" exact component={PendingInvoice} />
+        <PrivateRoute
+          path="/subscribe"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Subscribe}
+        />
+        <PrivateRoute
+          path="/overview"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Overview}
+        />
+        <PrivateRoute
+          path="/settings"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Settings}
+        />
+        <PrivateRoute
+          path="/transactions"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Transactions}
+        />
+        <PrivateRoute
+          path="/create.invoice"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={CreateInvoice}
+        />
+        <PrivateRoute
+          path="/paywall"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Paywall}
+        />
+        <PrivateRoute
+          path="/confirmation"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Confirmation}
+        />
+        <PrivateRoute
+          path="/paidinvoice"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={PaidInvoice}
+        />
+        <PrivateRoute
+          path="/pendinginvoice"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={PendingInvoice}
+        />
         <Route path="/invoice" exact component={Invoice} />
-        <Route path="/giftfriends" exact component={GiftFriends} />
-        <Route path="/lead" exact component={Lead} />
-        <Route component={Home} />
+        <PrivateRoute
+          path="/giftfriends"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={GiftFriends}
+        />
+        <PrivateRoute
+          path="/lead"
+          exact
+          isAuthenticated={isAuthenticated}
+          component={Lead}
+        />
+        <PrivateRoute component={Home} />
       </Switch>
     </Router>
   );

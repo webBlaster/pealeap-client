@@ -1,91 +1,139 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Submit from "../components/button.js";
 import Header from "../components/header.js";
-
-const Container = styled.div`
-  padding: 5%;
-  text-align: center;
-  background: #f0fafa;
-  margin: 0;
-  margin-top: -80px;
-  label {
-    text-align: left !important;
-    font-size: 15px;
-  }
-
-  form {
-    text-align: left;
-    font-size: 15px;
-    font-weight: 400;
-    color: #838383;
-    font-family: Roboto;
-    padding: 10% 5%;
-    background: white;
-    border-radius: 7px;
-    margin: 0;
-    padding-top: 100px;
-  }
-
-  input {
-    width: 90%;
-    height: 50px;
-    padding: 0 5%;
-    border-radius: 5px;
-    border: 1px solid #838383;
-    margin: 5% 0;
-  }
-
-  @media (min-width: 800px) {
-    width: 30%;
-    margin: 0 auto;
-  }
-`;
-
-const CircleLogo = styled.div`
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 200px;
-  border: 1px solid #489f9f;
-  margin: 0 auto;
-  margin-bottom: -70px;
-  background: white;
-  color: #489f9f;
-`;
+import BankList from "../components/banklist.js";
+import surogate from "../assets/clock.svg";
+import { Container, CircleLogo } from "../styles/settings.js";
+import { getBankList, updatePicture } from "../actions/settings.js";
 
 const Settings = () => {
+  const dispatch = useDispatch();
+  const fileRef = useRef();
+  const imageRef = useRef();
+  const imageFormRef = useRef();
+  const [profile, setProfile] = useState(null);
+  //bank state
+  const [banks, setBanks] = useState(null);
+
+  let uuid = useSelector((state) => state.userAuth.uuid);
+
+  const handlePicture = (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append("picture", profile.picture, profile.picture.name);
+    formData.append("userId", uuid);
+    dispatch(updatePicture(dispatch, formData));
+    console.log("stuff");
+  };
+
+  const previewImage = (event) => {
+    event.preventDefault();
+    let reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        imageRef.current.src = reader.result;
+        setProfile({ ...profile, picture: event.target.files[0] });
+      }
+    };
+    if (event.target.files[0]) {
+      reader.readAsDataURL(event.target.files[0]);
+      imageFormRef.current.submit();
+    }
+  };
+
+  const setProfileAttribute = (event) => {
+    setProfile({ ...profile, [event.target.name]: event.target.value });
+  };
+
+  useEffect(() => {
+    getBankList(setBanks);
+  }, []);
+
   return (
     <>
       <Header title="" />
       <Container>
-        <CircleLogo>
-          <p>Logo</p>
+        <CircleLogo
+          onClick={() => {
+            fileRef.current.click();
+          }}
+        >
+          <img alt="Logo" ref={imageRef} src={surogate} />
+          <form
+            className="imageForm"
+            ref={imageFormRef}
+            onSubmit={handlePicture}
+          >
+            <input
+              type="file"
+              ref={fileRef}
+              name="picture"
+              accept="image/*"
+              onChange={previewImage}
+            />
+            <input type="submit" value="submit" />
+          </form>
         </CircleLogo>
-        <form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            console.log(profile);
+          }}
+        >
           <label>Merchants Name</label>
           <br />
-          <input type="text" placeholder="Name" required />
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            onChange={setProfileAttribute}
+            required
+          />
           <br />
           <label>Phone Number</label>
           <br />
-          <input type="text" placeholder="Phone Number" required />
+          <input
+            type="tel"
+            pattern="[0-9]{11}"
+            placeholder="080851*****"
+            name="phoneNumber"
+            onChange={setProfileAttribute}
+            required
+          />
           <br />
-          <label>Bank Name</label>
+          <label htmlFor="bankName">Bank Name</label>
           <br />
-          <input type="text" placeholder="Bank Name" required />
+          <select
+            as="select"
+            name="bankName"
+            id="bankName"
+            onChange={setProfileAttribute}
+            required
+          >
+            <BankList banks={banks} />
+          </select>
           <br />
           <label>Account Number</label>
           <br />
-          <input type="text" placeholder="Account Number" required />
+          <input
+            type="number"
+            placeholder="Account Number"
+            name="accountNumber"
+            onChange={setProfileAttribute}
+            required
+          />
           <br />
           <label>Account Name</label>
           <br />
-          <input type="text" placeholder="Account Name" required />
+          <input
+            type="text"
+            placeholder="Account Name"
+            name="accountName"
+            onChange={setProfileAttribute}
+            required
+          />
           <br />
           <Submit text="Save" />
         </form>

@@ -74,7 +74,7 @@ const GreenStatsCard = ({ received, pending }) => {
         <div className="invoice">
           <img src={clock} alt="clock icon" />
           <p>
-            <Link to="/">View all Invoices</Link>
+            <Link to="/invoice">View all Invoices</Link>
           </p>
           <img src={greenarrow} alt="forward icon" />
         </div>
