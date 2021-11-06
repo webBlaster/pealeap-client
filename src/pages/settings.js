@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Submit from "../components/button.js";
 import Header from "../components/header.js";
 import BankList from "../components/banklist.js";
-import { Container, CircleLogo } from "../styles/settings.js";
+import { MainContainer, Container, CircleLogo } from "../styles/settings.js";
 import {
   getBankList,
   getProfile,
@@ -71,90 +71,92 @@ const Settings = () => {
   return (
     <>
       <Header title="" />
-      <Container>
-        <CircleLogo
-          onClick={() => {
-            fileRef.current.click();
-          }}
-        >
-          <img alt="Logo" ref={imageRef} src={profile?.imageUrl} />
-          <form
-            className="imageForm"
-            onSubmit={handlePicture}
-            encType="multipart/form-data"
+      <MainContainer>
+        <Container>
+          <CircleLogo
+            onClick={() => {
+              fileRef.current.click();
+            }}
           >
+            <img alt="Logo" ref={imageRef} src={profile?.imageUrl} />
+            <form
+              className="imageForm"
+              onSubmit={handlePicture}
+              encType="multipart/form-data"
+            >
+              <input
+                type="file"
+                ref={fileRef}
+                name="picture"
+                accept="image/*"
+                onChange={previewImage}
+              />
+              <input type="submit" value="submit" ref={imageSubmitRef} />
+            </form>
+          </CircleLogo>
+          <form onSubmit={handleProfile}>
+            <label>Merchants Name</label>
+            <br />
             <input
-              type="file"
-              ref={fileRef}
-              name="picture"
-              accept="image/*"
-              onChange={previewImage}
+              type="text"
+              placeholder="Name"
+              name="name"
+              value={profile?.name}
+              onChange={setProfileAttribute}
+              required
             />
-            <input type="submit" value="submit" ref={imageSubmitRef} />
+            <br />
+            <label>Phone Number</label>
+            <br />
+            <input
+              type="tel"
+              pattern="[0-9]{11}"
+              placeholder="080851*****"
+              name="phoneNumber"
+              value={profile?.phoneNumber}
+              onChange={setProfileAttribute}
+              required
+            />
+            <br />
+            <label htmlFor="bankName">Bank Name</label>
+            <br />
+            <select
+              as="select"
+              name="bankName"
+              id="bankName"
+              value={profile?.bankName}
+              onChange={setProfileAttribute}
+              required
+            >
+              <BankList banks={banks} />
+            </select>
+            <br />
+            <label>Account Number</label>
+            <br />
+            <input
+              type="number"
+              placeholder="Account Number"
+              name="accountNumber"
+              onChange={setProfileAttribute}
+              value={profile?.accountNumber}
+              required
+            />
+            <br />
+            <label>Account Name</label>
+            <br />
+            <input
+              type="text"
+              placeholder="Account Name"
+              name="accountName"
+              value={profile?.accountName}
+              onChange={setProfileAttribute}
+              required
+            />
+            <br />
+            <Submit text="Save" />
           </form>
-        </CircleLogo>
-        <form onSubmit={handleProfile}>
-          <label>Merchants Name</label>
-          <br />
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={profile?.name}
-            onChange={setProfileAttribute}
-            required
-          />
-          <br />
-          <label>Phone Number</label>
-          <br />
-          <input
-            type="tel"
-            pattern="[0-9]{11}"
-            placeholder="080851*****"
-            name="phoneNumber"
-            value={profile?.phoneNumber}
-            onChange={setProfileAttribute}
-            required
-          />
-          <br />
-          <label htmlFor="bankName">Bank Name</label>
-          <br />
-          <select
-            as="select"
-            name="bankName"
-            id="bankName"
-            value={profile?.bankName}
-            onChange={setProfileAttribute}
-            required
-          >
-            <BankList banks={banks} />
-          </select>
-          <br />
-          <label>Account Number</label>
-          <br />
-          <input
-            type="number"
-            placeholder="Account Number"
-            name="accountNumber"
-            onChange={setProfileAttribute}
-            value={profile?.accountNumber}
-            required
-          />
-          <br />
-          <label>Account Name</label>
-          <br />
-          <input
-            type="text"
-            placeholder="Account Name"
-            name="accountName"
-            value={profile?.accountName}
-            onChange={setProfileAttribute}
-            required
-          />
-          <br />
-          <Submit text="Save" />
-        </form>
-      </Container>
+        </Container>
+      </MainContainer>
     </>
   );
 };
