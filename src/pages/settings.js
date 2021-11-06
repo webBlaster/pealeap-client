@@ -3,16 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import Submit from "../components/button.js";
 import Header from "../components/header.js";
 import BankList from "../components/banklist.js";
-import surogate from "../assets/clock.svg";
 import { Container, CircleLogo } from "../styles/settings.js";
-import { getBankList, updatePicture } from "../actions/settings.js";
+import {
+  getBankList,
+  getProfile,
+  updatePicture,
+  updateProfile,
+} from "../actions/settings.js";
 
 const Settings = () => {
   const dispatch = useDispatch();
   const fileRef = useRef();
   const imageRef = useRef();
-  const imageFormRef = useRef();
-  const [profile, setProfile] = useState(null);
+  const imageSubmitRef = useRef();
+  const [profile, setProfile] = useState({});
   //bank state
   const [banks, setBanks] = useState(null);
 
@@ -21,10 +25,12 @@ const Settings = () => {
   const handlePicture = (event) => {
     event.preventDefault();
     let formData = new FormData();
-    formData.append("picture", profile.picture, profile.picture.name);
     formData.append("userId", uuid);
+    if (profile?.picture?.name) {
+      formData.append("picture", profile?.picture, profile?.picture?.name);
+    }
     dispatch(updatePicture(dispatch, formData));
-    console.log("stuff");
+    console.log(formData);
   };
 
   const previewImage = (event) => {
@@ -39,17 +45,28 @@ const Settings = () => {
     };
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
-      imageFormRef.current.submit();
+      imageSubmitRef.current.click();
     }
+  };
+
+  const handleProfile = (event) => {
+    event.preventDefault();
+    console.log(profile);
+    dispatch(updateProfile(dispatch, { ...profile, userId: uuid }));
   };
 
   const setProfileAttribute = (event) => {
     setProfile({ ...profile, [event.target.name]: event.target.value });
   };
 
-  useEffect(() => {
-    getBankList(setBanks);
-  }, []);
+  useEffect(
+    () => {
+      getBankList(setBanks);
+      getProfile(uuid, profile, setProfile);
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <>
@@ -60,11 +77,11 @@ const Settings = () => {
             fileRef.current.click();
           }}
         >
-          <img alt="Logo" ref={imageRef} src={surogate} />
+          <img alt="Logo" ref={imageRef} src={profile?.imageUrl} />
           <form
             className="imageForm"
-            ref={imageFormRef}
             onSubmit={handlePicture}
+            encType="multipart/form-data"
           >
             <input
               type="file"
@@ -73,21 +90,17 @@ const Settings = () => {
               accept="image/*"
               onChange={previewImage}
             />
-            <input type="submit" value="submit" />
+            <input type="submit" value="submit" ref={imageSubmitRef} />
           </form>
         </CircleLogo>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            console.log(profile);
-          }}
-        >
+        <form onSubmit={handleProfile}>
           <label>Merchants Name</label>
           <br />
           <input
             type="text"
             placeholder="Name"
             name="name"
+            value={profile?.name}
             onChange={setProfileAttribute}
             required
           />
@@ -99,6 +112,7 @@ const Settings = () => {
             pattern="[0-9]{11}"
             placeholder="080851*****"
             name="phoneNumber"
+            value={profile?.phoneNumber}
             onChange={setProfileAttribute}
             required
           />
@@ -109,6 +123,7 @@ const Settings = () => {
             as="select"
             name="bankName"
             id="bankName"
+            value={profile?.bankName}
             onChange={setProfileAttribute}
             required
           >
@@ -122,6 +137,7 @@ const Settings = () => {
             placeholder="Account Number"
             name="accountNumber"
             onChange={setProfileAttribute}
+            value={profile?.accountNumber}
             required
           />
           <br />
@@ -131,6 +147,7 @@ const Settings = () => {
             type="text"
             placeholder="Account Name"
             name="accountName"
+            value={profile?.accountName}
             onChange={setProfileAttribute}
             required
           />

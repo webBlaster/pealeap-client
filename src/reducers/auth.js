@@ -5,7 +5,7 @@ import {
 } from "../constants.js";
 
 const initialState = {
-  isAuthenticated: !false,
+  isAuthenticated: false,
   uuid: null,
   email: null,
   token: null,

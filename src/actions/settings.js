@@ -4,12 +4,23 @@ import {
   RESPONSE_SUCCESS_MESSAGE,
 } from "../constants";
 
-export const updateProfile = (dispatch, values, setLoading) => {
-  //
-};
+export const updateProfile = (dispatch, values) => {
+  return async (dispatch) => {
+    let response = await fetch(API_URL + "/update.profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
 
-export const verifyAccountNumber = (dispatch) => {
-  //
+    if (response) {
+      let result = await response.json();
+      if (result.status) {
+        dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
+      }
+    }
+  };
 };
 
 export const updatePicture = (dispatch, formData) => {
@@ -28,8 +39,20 @@ export const updatePicture = (dispatch, formData) => {
   };
 };
 
-export const getProfile = (dispatch) => {
-  //
+export const getProfile = async (userId, profile, setProfile) => {
+  let response = await fetch(API_URL + "/profile", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId }),
+  }).catch((err) => {
+    console.log(err);
+  });
+  if (response) {
+    let result = await response.json();
+    setProfile({ ...profile, ...result.data });
+  }
 };
 
 export const getBankList = async (setBanks) => {
