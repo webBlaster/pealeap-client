@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Header from "../components/header.js";
 import StatsCard from "../components/statscard.js";
 import Invoices from "../components/invoices.js";
 import RequestPayment from "../components/requestpayment.js";
+import { getAllInvoice } from "../actions/invoices.js";
 
 const Container = styled.div`
   text-align: center;
@@ -19,7 +21,15 @@ const Container = styled.div`
 `;
 
 const Transactions = () => {
-  const [invoices] = useState(null);
+  const [invoices, setInvoices] = useState([]);
+  let userId = useSelector((state) => state.userAuth.uuid);
+  useEffect(
+    () => {
+      getAllInvoice(userId, invoices, setInvoices);
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Header title="Transactions" />

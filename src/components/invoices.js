@@ -15,6 +15,11 @@ const Container = styled.div`
     text-align: left;
   }
 
+  a {
+    text-decoration: none;
+    color: #838383;
+  }
+
   span {
     display: flex;
     align-items: center;
@@ -68,11 +73,12 @@ const Invoices = ({ invoices }) => {
         </span>
 
         <ul>
-          {invoices ? (
+          {invoices.length > 0 ? (
             invoices.map((item) => (
               <Link to="/pendinginvoice">
-                <li key={item}>
-                  <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
+                <li key={item.uuid}>
+                  <h4>{item.name}</h4>{" "}
+                  <img src={greaterthan} alt="greater than" />
                 </li>
               </Link>
             ))
@@ -81,7 +87,6 @@ const Invoices = ({ invoices }) => {
           )}
         </ul>
       </Container>
-      ;
     </>
   );
 };

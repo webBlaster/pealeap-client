@@ -1,5 +1,5 @@
-//export const API_URL = "http://localhost:8000";
-export const API_URL = "https://pealeap-server.herokuapp.com";
+export const API_URL = "http://localhost:8000";
+//export const API_URL = "https://pealeap-server.herokuapp.com";
 export const PAYSTACK_API_URL = "https://api.paystack.co";
 
 export const LOGIN_USER_SUCCESSFUL = "LOGIN_USER_SUCCESSFUL";
