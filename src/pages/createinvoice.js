@@ -1,110 +1,68 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import forwardicon from "../assets/forwardicon.svg";
-
-const Button = styled.button`
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #489f9f;
-  border: none;
-  width: 100%;
-  margin: 0 auto;
-  padding: 3px 5%;
-  border-radius: 5px;
-  p {
-    font-weight: bold;
-    font-family: Poppins;
-  }
-`;
-
-const Container = styled.div`
-  padding: 5%;
-  text-align: center;
-  margin: 0;
-  label {
-    font-size: 15px;
-  }
-
-  form {
-    font-size: 15px;
-    font-weight: 400;
-    color: #838383;
-    font-family: Roboto;
-    padding: 10% 5%;
-    background: white;
-    border-radius: 7px;
-    margin: 0;
-
-    input {
-      margin: 5px 0;
-    }
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .number {
-        width: 50%;
-      }
-      .amount {
-        width: 65%;
-      }
-    }
-  }
-
-  input {
-    width: 90%;
-    height: 50px;
-    padding: 0 5%;
-    border-radius: 5px;
-    border: 1px solid #838383;
-    margin: 5% 0;
-  }
-
-  textarea {
-    width: 90%;
-    padding: 5% 5% !important;
-    border-radius: 5px;
-    border: 1px solid #838383;
-    height: 100px;
-    margin: 5% 0;
-  }
-
-  @media (min-width: 800px) {
-    width: 30%;
-    margin: 0 auto;
-  }
-`;
+import { Container, Button } from "../styles/createinvoice";
+import { createInvoice } from "../actions/invoices";
 
 const CreateInvoice = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  let uuid = useSelector((state) => state.userAuth.uuid);
+  const [invoice, setInvoice] = useState({ userId: uuid });
+
+  const handleAttribute = (event) => {
+    setInvoice({ ...invoice, [event.target.name]: event.target.value });
+    console.log(invoice);
+  };
+
+  const handleInvoice = (event) => {
+    event.preventDefault();
+    dispatch(createInvoice(dispatch, invoice, history));
+  };
+
   return (
     <>
       <Container>
-        <form>
+        <form onSubmit={handleInvoice}>
           <h3>Create Invoice</h3>
-          <input type="text" placeholder="Customer’s Name" required />
+          <input
+            type="text"
+            placeholder="Customer’s Name"
+            name="name"
+            onChange={handleAttribute}
+            required
+          />
           <div>
             <label>Customer’s No.</label>
             <input
-              type="text"
-              placeholder="Phone Number"
+              type="tel"
+              pattern="[0-9]{11}"
+              placeholder="080851*****"
               className="number"
+              name="customerNumber"
+              onChange={handleAttribute}
               required
             />
           </div>
           <div>
             <label>Amount</label>
             <input
-              type="text"
-              placeholder="Amount"
+              type="number"
+              min={1}
+              placeholder="Amount(Naira)"
               className="amount"
+              name="amount"
+              onChange={handleAttribute}
               required
             />
           </div>
-          <textarea required placeholder="Notes"></textarea>
+          <textarea
+            required
+            placeholder="Notes"
+            name="note"
+            onChange={handleAttribute}
+          ></textarea>
           <br />
           <Button>
             <p>Save and Send</p>
