@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import giftbox from "../assets/giftbox.svg";
 import Submit from "../components/button.js";
@@ -11,9 +11,19 @@ import {
   Skip,
 } from "../styles/giftfriends.js";
 
+import { getInvoice } from "../actions/invoices";
+
 const GiftFriends = () => {
+  const [invoice, setInvoice] = useState(null);
   const history = useHistory();
   let uuid = useParams().uuid;
+  useEffect(
+    () => {
+      getInvoice(uuid, setInvoice);
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Container>
@@ -30,7 +40,7 @@ const GiftFriends = () => {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
-            history.push("/paywall/" + uuid);
+            history.push(`/paywall/${uuid}/${invoice?.UserUuid}`);
           }}
         >
           <div>
@@ -38,7 +48,13 @@ const GiftFriends = () => {
             <input type="text" placeholder="Friend’s Name" required />
             <br />
             <span>
-              <label>Whatsapp No.</label> <input type="mobile" required />
+              <label>Whatsapp No.</label>{" "}
+              <input
+                type="tel"
+                pattern="[0-9]{11}"
+                placeholder="080851*****"
+                required
+              />
             </span>
           </div>
 
@@ -47,7 +63,13 @@ const GiftFriends = () => {
             <input type="text" placeholder="Friend’s Name" required />
             <br />
             <span>
-              <label>Whatsapp No.</label> <input type="mobile" required />
+              <label>Whatsapp No.</label>{" "}
+              <input
+                type="tel"
+                pattern="[0-9]{11}"
+                placeholder="080851*****"
+                required
+              />
             </span>
           </div>
 
@@ -64,7 +86,9 @@ const GiftFriends = () => {
 
           <Submit text="Proceed" />
           <Skip>
-            <Link to={"/paywall/" + uuid}>Pay NGN 19,500 instead</Link>
+            <Link to={`/paywall/${uuid}/${invoice?.UserUuid}`}>
+              Pay NGN {invoice?.amount} instead
+            </Link>
           </Skip>
         </Form>
       </Container>
