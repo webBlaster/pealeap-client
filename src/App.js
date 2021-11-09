@@ -54,7 +54,7 @@ function App() {
           isAuthenticated={isAuthenticated}
           component={CreateInvoice}
         />
-        <Route path="/paywall/:uuid" exact component={Paywall} />
+        <Route path="/paywall/:uuid/:useruuid" exact component={Paywall} />
         <PrivateRoute
           path="/confirmation"
           exact
