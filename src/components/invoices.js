@@ -60,22 +60,27 @@ const Empty = styled.li`
   opacity: 0.6;
 `;
 
-const Invoices = ({ invoices }) => {
+const Invoices = ({ invoices, filterInvoice }) => {
   return (
     <>
       <Container>
         <span>
           <h4>Transactions</h4>
-          <select name="options" className="options">
-            <option value="paid">Paid</option>
+          <select name="options" className="options" onChange={filterInvoice}>
             <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
           </select>
         </span>
 
         <ul>
           {invoices.length > 0 ? (
             invoices.map((item) => (
-              <Link to={"/pendinginvoice/" + item.uuid} key={item.uuid}>
+              <Link
+                to={
+                  item.paid ? "/paidinvoice/" : "/pendinginvoice/" + item.uuid
+                }
+                key={item.uuid}
+              >
                 <li>
                   <h4>{item.name}</h4>{" "}
                   <img src={greaterthan} alt="greater than" />
