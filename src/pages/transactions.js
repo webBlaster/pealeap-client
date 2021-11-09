@@ -22,7 +22,12 @@ const Container = styled.div`
 
 const Transactions = () => {
   const [invoices, setInvoices] = useState([]);
+  let [paid, setPaid] = useState(false);
+  let filteredInvoice = invoices.filter((item) => item.paid === paid);
   let userId = useSelector((state) => state.userAuth.uuid);
+  const filterInvoice = () => {
+    setPaid(!paid);
+  };
   useEffect(
     () => {
       getAllInvoice(userId, invoices, setInvoices);
@@ -36,7 +41,7 @@ const Transactions = () => {
       <Container>
         <RequestPayment title="Request a payment" />
         <StatsCard received={2000} pending={2000} />
-        <Invoices invoices={invoices} />
+        <Invoices invoices={filteredInvoice} filterInvoice={filterInvoice} />
       </Container>
     </>
   );
