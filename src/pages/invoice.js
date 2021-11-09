@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import InvoiceCell from "../components/invoicecell.js";
 import Submit from "../components/button.js";
 import profilecard from "../assets/profilecard.svg";
@@ -9,6 +9,7 @@ import { getInvoice } from "../actions/invoices.js";
 const Invoice = () => {
   const [invoice, setInvoice] = useState(null);
   let invoiceId = useParams().uuid;
+  const history = useHistory();
 
   useEffect(
     () => {
@@ -34,9 +35,14 @@ const Invoice = () => {
           <p>Note</p>
           <p>{invoice?.note}</p>
         </Note>
-        <form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            history.push("/giftfriends/" + invoice.uuid);
+          }}
+        >
           <input type="text" placeholder="Pealeap Code (if any)" />
-          <Submit text="Pay NGN 19,500" />
+          <Submit text={"Pay NGN " + invoice?.amount} />
         </form>
         <h4>Powered by Pealeap</h4>
       </Container>
