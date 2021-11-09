@@ -4,7 +4,7 @@ import {
   RESPONSE_SUCCESS_MESSAGE,
 } from "../constants";
 
-export const updateProfile = (dispatch, values) => {
+export const updateProfile = (dispatch, values, setLoading) => {
   return async (dispatch) => {
     let response = await fetch(API_URL + "/update.profile", {
       method: "POST",
@@ -15,6 +15,7 @@ export const updateProfile = (dispatch, values) => {
     });
 
     if (response) {
+      setLoading(false);
       let result = await response.json();
       if (result.status) {
         dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });

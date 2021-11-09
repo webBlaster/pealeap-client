@@ -17,6 +17,7 @@ const Settings = () => {
   const imageRef = useRef();
   const imageSubmitRef = useRef();
   const [profile, setProfile] = useState({});
+  const [loading, setLoading] = useState(false);
   //bank state
   const [banks, setBanks] = useState(null);
 
@@ -52,7 +53,8 @@ const Settings = () => {
   const handleProfile = (event) => {
     event.preventDefault();
     console.log(profile);
-    dispatch(updateProfile(dispatch, { ...profile, userId: uuid }));
+    setLoading(true);
+    dispatch(updateProfile(dispatch, { ...profile, userId: uuid }, setLoading));
   };
 
   const setProfileAttribute = (event) => {
@@ -153,7 +155,7 @@ const Settings = () => {
               required
             />
             <br />
-            <Submit text="Save" />
+            <Submit text="Save" loading={loading} />
           </form>
         </Container>
       </MainContainer>

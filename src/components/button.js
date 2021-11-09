@@ -8,6 +8,7 @@ const SubmitButton = styled.input`
   cursor: pointer;
   border: none !important;
   background: #489f9f;
+  opacity: ${(props) => (props.off ? 0.4 : 1)};
   padding: 5% 5%;
   border-radius: 5px;
   font-size: 16px;
@@ -18,10 +19,14 @@ const SubmitButton = styled.input`
   font-weight: 700;
 `;
 
-const Submit = ({ text }) => {
+const Submit = ({ text, loading }) => {
   return (
     <>
-      <SubmitButton value={text} type="submit" />
+      {!loading ? (
+        <SubmitButton value={text} type="submit" />
+      ) : (
+        <SubmitButton type="submit" value="Loading..." off disabled />
+      )}
     </>
   );
 };
