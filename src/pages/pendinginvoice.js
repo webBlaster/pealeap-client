@@ -8,7 +8,12 @@ import { getInvoice } from "../actions/invoices.js";
 
 const PendingInvoice = () => {
   const [invoice, setInvoice] = useState(null);
+  const [copied, setCopied] = useState(false);
   let invoiceId = useParams().uuid;
+
+  const showCopied = () => {
+    setCopied(true);
+  };
 
   useEffect(
     () => {
@@ -38,8 +43,12 @@ const PendingInvoice = () => {
           <p>{invoice?.note}</p>
         </Note>
 
-        <CopyInvoice link={`pealeap.netlify.app/${invoiceId}`} />
+        <CopyInvoice
+          link={`pealeap.netlify.app/invoice/${invoiceId}`}
+          showCopied={showCopied}
+        />
         <h5>Share this link with your customer</h5>
+        <h5>{copied ? "Copied!" : ""}</h5>
       </Container>
     </>
   );

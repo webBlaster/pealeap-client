@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import copy from "../assets/copy.svg";
+import { copyText } from "../utils.js";
 
 const InvoiceLink = styled.div`
   display: flex;
@@ -41,15 +42,24 @@ const InvoiceLink = styled.div`
       align-items: center;
       text-align: left !important;
     }
+
+    img {
+      cursor: pointer;
+    }
   }
 `;
 
-const CopyInvoice = ({ link }) => {
+const CopyInvoice = ({ link, showCopied }) => {
+  const handleCopy = () => {
+    const url = `https://${link}`;
+    copyText(url);
+    showCopied();
+  };
   return (
     <InvoiceLink>
       <p>Invoice Link</p>
       <span>
-        <p>{link}</p> <img src={copy} alt="copy" />
+        <p>{link}</p> <img src={copy} alt="copy" onClick={handleCopy} />
       </span>
     </InvoiceLink>
   );
