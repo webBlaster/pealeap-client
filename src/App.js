@@ -54,12 +54,7 @@ function App() {
           isAuthenticated={isAuthenticated}
           component={CreateInvoice}
         />
-        <PrivateRoute
-          path="/paywall"
-          exact
-          isAuthenticated={isAuthenticated}
-          component={Paywall}
-        />
+        <Route path="/paywall/:uuid" exact component={Paywall} />
         <PrivateRoute
           path="/confirmation"
           exact
@@ -79,12 +74,7 @@ function App() {
           component={PendingInvoice}
         />
         <Route path="/invoice/:uuid" exact component={Invoice} />
-        <PrivateRoute
-          path="/giftfriends"
-          exact
-          isAuthenticated={isAuthenticated}
-          component={GiftFriends}
-        />
+        <Route path="/giftfriends/:uuid" exact component={GiftFriends} />
         <PrivateRoute
           path="/lead"
           exact
