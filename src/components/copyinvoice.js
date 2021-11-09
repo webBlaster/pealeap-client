@@ -12,7 +12,7 @@ const InvoiceLink = styled.div`
   color: white;
   align-items: center;
   justify-content: space-evenly;
-
+  overflow: hidden !important;
   font-family: Poppins;
   font-size: 15px;
   font-style: normal;
@@ -33,15 +33,23 @@ const InvoiceLink = styled.div`
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
+
+    p {
+      height: 20px !important;
+      width: 80% !important;
+      overflow: hidden;
+      align-items: center;
+      text-align: left !important;
+    }
   }
 `;
 
-const CopyInvoice = () => {
+const CopyInvoice = ({ link }) => {
   return (
     <InvoiceLink>
       <p>Invoice Link</p>
       <span>
-        <p>pealeap.com/dkwsnca</p> <img src={copy} alt="copy" />
+        <p>{link}</p> <img src={copy} alt="copy" />
       </span>
     </InvoiceLink>
   );
