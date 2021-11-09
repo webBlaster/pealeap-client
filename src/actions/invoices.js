@@ -37,3 +37,18 @@ export const getAllInvoice = async (userId, invoices, setInvoices) => {
     }
   }
 };
+
+export const getInvoice = async (invoiceId, setInvoice) => {
+  const response = await fetch(API_URL + "/invoice", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ uuid: invoiceId }),
+  });
+  if (response) {
+    const result = await response.json();
+    console.log(result);
+    setInvoice(result.data);
+  }
+};

@@ -75,8 +75,8 @@ const Invoices = ({ invoices }) => {
         <ul>
           {invoices.length > 0 ? (
             invoices.map((item) => (
-              <Link to="/pendinginvoice">
-                <li key={item.uuid}>
+              <Link to={"/pendinginvoice/" + item.uuid} key={item.uuid}>
+                <li>
                   <h4>{item.name}</h4>{" "}
                   <img src={greaterthan} alt="greater than" />
                 </li>

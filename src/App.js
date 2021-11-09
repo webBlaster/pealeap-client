@@ -67,18 +67,18 @@ function App() {
           component={Confirmation}
         />
         <PrivateRoute
-          path="/paidinvoice"
+          path="/paidinvoice/:uuid"
           exact
           isAuthenticated={isAuthenticated}
           component={PaidInvoice}
         />
         <PrivateRoute
-          path="/pendinginvoice"
+          path="/pendinginvoice/:uuid"
           exact
           isAuthenticated={isAuthenticated}
           component={PendingInvoice}
         />
-        <Route path="/invoice" exact component={Invoice} />
+        <Route path="/invoice/:uuid" exact component={Invoice} />
         <PrivateRoute
           path="/giftfriends"
           exact
