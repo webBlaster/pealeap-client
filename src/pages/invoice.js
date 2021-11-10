@@ -38,7 +38,7 @@ const Invoice = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            history.push("/giftfriends/" + invoice.uuid);
+            history.push("/giftfriends/" + invoice?.uuid);
           }}
         >
           <input type="text" placeholder="Pealeap Code (if any)" />

@@ -15,8 +15,14 @@ import { getInvoice } from "../actions/invoices";
 
 const GiftFriends = () => {
   const [invoice, setInvoice] = useState(null);
+  const [leads, setLeads] = useState({});
   const history = useHistory();
   let uuid = useParams().uuid;
+
+  const updateAttribute = (event) => {
+    setLeads({ ...leads, [event.target.name]: event.target.value });
+    console.log(leads);
+  };
   useEffect(
     () => {
       getInvoice(uuid, setInvoice);
@@ -45,14 +51,22 @@ const GiftFriends = () => {
         >
           <div>
             <p className="circle">1</p>
-            <input type="text" placeholder="Friend’s Name" required />
+            <input
+              onChange={updateAttribute}
+              type="text"
+              placeholder="Friend’s Name"
+              name="firstLeadName"
+              required
+            />
             <br />
             <span>
               <label>Whatsapp No.</label>{" "}
               <input
+                onChange={updateAttribute}
                 type="tel"
                 pattern="[0-9]{11}"
                 placeholder="080851*****"
+                name="firstLeadNumber"
                 required
               />
             </span>
@@ -60,14 +74,22 @@ const GiftFriends = () => {
 
           <div>
             <p className="circle">2</p>
-            <input type="text" placeholder="Friend’s Name" required />
+            <input
+              onChange={updateAttribute}
+              type="text"
+              placeholder="Friend’s Name"
+              name="secondLeadName"
+              required
+            />
             <br />
             <span>
               <label>Whatsapp No.</label>{" "}
               <input
+                onChange={updateAttribute}
                 type="tel"
                 pattern="[0-9]{11}"
                 placeholder="080851*****"
+                name="secondLeadNumber"
                 required
               />
             </span>
@@ -75,6 +97,7 @@ const GiftFriends = () => {
 
           <span className="checkbox">
             <input
+              onChange={updateAttribute}
               type="checkbox"
               id="agree"
               name="agree"
