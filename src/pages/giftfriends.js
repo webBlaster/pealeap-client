@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams, useHistory } from "react-router-dom";
 import giftbox from "../assets/giftbox.svg";
 import Submit from "../components/button.js";
@@ -11,13 +12,20 @@ import {
   Skip,
 } from "../styles/giftfriends.js";
 
-import { getInvoice } from "../actions/invoices";
+import { getInvoice } from "../actions/invoices.js";
+import { createLeads } from "../actions/leads.js";
 
 const GiftFriends = () => {
-  const [invoice, setInvoice] = useState(null);
+  const [invoice, setInvoice] = useState({});
   const [leads, setLeads] = useState({});
   const history = useHistory();
+  const dispatch = useDispatch();
   let uuid = useParams().uuid;
+
+  const handleLeadsSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createLeads(dispatch, history, leads, invoice));
+  };
 
   const updateAttribute = (event) => {
     setLeads({ ...leads, [event.target.name]: event.target.value });
@@ -43,12 +51,7 @@ const GiftFriends = () => {
             You would also get a 5% Discount on this order.
           </p>
         </InfoCard>
-        <Form
-          onSubmit={(event) => {
-            event.preventDefault();
-            history.push(`/paywall/${uuid}/${invoice?.UserUuid}`);
-          }}
-        >
+        <Form onSubmit={handleLeadsSubmit}>
           <div>
             <p className="circle">1</p>
             <input

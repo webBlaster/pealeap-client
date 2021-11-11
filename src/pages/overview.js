@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Header from "../components/header.js";
 import RequestPayment from "../components/requestpayment.js";
 import GreenStatsCard from "../components/greenstatscard.js";
 import profilecard from "../assets/profilecard.svg";
 import Leads from "../components/leads.js";
+import { getAllLeads } from "../actions/leads.js";
 
 const Container = styled.div`
   text-align: center;
@@ -24,7 +26,15 @@ const ProfileCard = styled.img`
 `;
 
 const Overview = () => {
-  let [leads] = useState(null);
+  let [leads, setLeads] = useState([]);
+  let userUuid = useSelector((state) => state.userAuth.uuid);
+  useEffect(
+    () => {
+      getAllLeads(userUuid, leads, setLeads);
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Header title="Overview" />

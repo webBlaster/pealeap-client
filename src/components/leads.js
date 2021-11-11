@@ -47,11 +47,12 @@ const Leads = ({ leads }) => {
       <Container>
         <h4>Leads</h4>
         <ul>
-          {leads ? (
+          {leads.length > 0 ? (
             leads.map((item) => (
-              <Link to="/lead">
-                <li key={item}>
-                  <h4>John Doe</h4> <img src={greaterthan} alt="greater than" />
+              <Link to={`/lead/${item.uuid}`} key={item.uuid}>
+                <li>
+                  <h4>{item.name}</h4>{" "}
+                  <img src={greaterthan} alt="greater than" />
                 </li>
               </Link>
             ))
