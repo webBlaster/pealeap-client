@@ -55,3 +55,17 @@ export const getLead = async (leadId, setLead) => {
     setLead(result.data);
   }
 };
+
+export const updateLeadToMarked = async (uuid) => {
+  const response = await fetch(API_URL + "/leads.update.marked", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ uuid }),
+  });
+  if (response) {
+    const result = await response.json();
+    console.log(result);
+  }
+};

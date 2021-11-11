@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Redirect, Link, useParams, useHistory } from "react-router-dom";
 import giftbox from "../assets/giftbox.svg";
 import Submit from "../components/button.js";
 import {
@@ -38,7 +38,7 @@ const GiftFriends = () => {
     // eslint-disable-next-line
     []
   );
-  return (
+  return !invoice?.paid ? (
     <>
       <Container>
         <GreenTop>
@@ -119,6 +119,8 @@ const GiftFriends = () => {
         </Form>
       </Container>
     </>
+  ) : (
+    <Redirect to="/confirmation" />
   );
 };
 

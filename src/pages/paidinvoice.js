@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import InvoiceCell from "../components/invoicecell.js";
 import greendot from "../assets/greendot.svg";
-import CopyInvoice from "../components/copyinvoice.js";
 
 const Container = styled.div`
   padding: 5%;
@@ -110,8 +109,6 @@ const PaidInvoice = () => {
         <Wrapper>
           <InvoiceCell property="New Amount" value="NGN 19,000" />
         </Wrapper>
-
-        <CopyInvoice />
       </Container>
     </>
   );
