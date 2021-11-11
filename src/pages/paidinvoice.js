@@ -1,85 +1,22 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import InvoiceCell from "../components/invoicecell.js";
 import greendot from "../assets/greendot.svg";
+import { Container, Note, Wrapper, Coupon } from "../styles/paidinvoice.js";
 
-const Container = styled.div`
-  padding: 5%;
-  text-align: center;
-  color: #838383;
-
-  h1 {
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-
-  span {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 15%;
-  }
-
-  h5 {
-    font-family: Poppins;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 19px;
-    letter-spacing: 0em;
-  }
-  .top {
-    display: flex;
-    margin: 0 auto;
-    justify-content: space-between;
-    align-items: center;
-  }
-  p {
-    text-align: left;
-  }
-
-  @media (min-width: 800px) {
-    width: 30%;
-    margin: 0 auto;
-  }
-`;
-const Note = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  font-family: Roboto;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 0em;
-  text-align: left;
-`;
-
-const Wrapper = styled.span`
-  background: #f0fafa;
-  width: 100% !important;
-  border-radius: 4px;
-  margin: 5% auto;
-`;
-
-const Coupon = styled.div`
-  display: flex;
-  align-items: center;
-
-  p {
-    font-size: 14px;
-    margin-right: 4%;
-    padding: 2%;
-    background: #f0fafa;
-  }
-`;
+import { getInvoice } from "../actions/invoices.js";
 
 const PaidInvoice = () => {
+  const [invoice, setInvoice] = useState(null);
+  let invoiceId = useParams().uuid;
+  useEffect(
+    () => {
+      getInvoice(invoiceId, setInvoice);
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Container>
@@ -90,24 +27,24 @@ const PaidInvoice = () => {
             <p>Paid</p>
           </span>
         </div>
-        <InvoiceCell property="Amount" value="NGN 20,000" />
-        <InvoiceCell property="Name" value="John Doe" />
-        <InvoiceCell property="Customer’s No." value="+234 7081104245" />
+        <InvoiceCell property="Amount" value={`NGN ${invoice?.amount}`} />
+        <InvoiceCell property="Name" value={`${invoice?.name}`} />
+        <InvoiceCell
+          property="Customer’s No."
+          value={`+234 ${invoice?.customerNumber}`}
+        />
         <Note>
           <p>Note</p>
-          <p>
-            Lorem ipseum dolor met calor Lorem ipseum dolor met calor Lorem
-            ipseum dolor met calor Lorem ipseum dolor met calor{" "}
-          </p>
+          <p>{`${invoice?.note}`}</p>
         </Note>
 
         <Coupon>
-          <p>coupon applied</p>
-          <p>2 friends referred</p>
+          <p>{invoice?.discountLevel >= 1 ? "coupon applied" : null}</p>
+          <p>{invoice?.discountLevel === 2 ? "2 friends referred" : null}</p>
         </Coupon>
 
         <Wrapper>
-          <InvoiceCell property="New Amount" value="NGN 19,000" />
+          <InvoiceCell property="New Amount" value={`NGN ${invoice?.amount}`} />
         </Wrapper>
       </Container>
     </>
