@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import forwardicon from "../assets/forwardicon.svg";
 import { Container, Button } from "../styles/createinvoice";
@@ -9,6 +9,7 @@ const CreateInvoice = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let uuid = useSelector((state) => state.userAuth.uuid);
+  let isSubcribed = useSelector((state) => state.userAuth.subscribed);
   const [invoice, setInvoice] = useState({ userId: uuid });
 
   const handleAttribute = (event) => {
@@ -21,7 +22,7 @@ const CreateInvoice = () => {
     dispatch(createInvoice(dispatch, invoice, history));
   };
 
-  return (
+  return isSubcribed ? (
     <>
       <Container>
         <form onSubmit={handleInvoice}>
@@ -71,6 +72,8 @@ const CreateInvoice = () => {
         </form>
       </Container>
     </>
+  ) : (
+    <Redirect to="/subscribe" />
   );
 };
 

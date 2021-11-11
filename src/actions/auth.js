@@ -34,3 +34,24 @@ export const signOut = (dispatch, history) => {
     history.push("/");
   };
 };
+
+export const subscribeUser = (dispatch, history, uuid) => {
+  return async (dispatch) => {
+    let response = await fetch(API_URL + "/subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uuid }),
+    }).catch((err) => {
+      console.log(err);
+    });
+    if (response) {
+      let result = await response.json();
+      if (result.status === 200) {
+        //dispatch({ type: LOGIN_USER_SUCCESSFUL, payload: result.data });
+        history.push("/create.invoice");
+      }
+    }
+  };
+};
