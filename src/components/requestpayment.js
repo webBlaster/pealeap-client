@@ -30,7 +30,7 @@ const RequestPayment = ({ title }) => {
   return (
     <>
       <Container>
-        <Link to="/subscribe" className="link">
+        <Link to="/create.invoice" className="link">
           <Button>
             <p>{title}</p>
             <img src={forwardicon} alt="go" />

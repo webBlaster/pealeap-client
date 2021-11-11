@@ -1,17 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import pealeap from "../assets/pealeap.png";
 import { Container, Logo, Button, AccountInfo } from "../styles/subscribe";
 import { PaystackButton } from "react-paystack";
 import { PAYSTACK_PUBLIC_KEY } from "../constants";
+import { subscribeUser } from "../actions/auth";
 
 const Subscribe = () => {
+  let dispatch = useDispatch();
+  let history = useHistory();
   let email = useSelector((state) => state.userAuth.email);
   let uuid = useSelector((state) => state.userAuth.uuid);
 
   const handleSuccess = () => {
-    console.log(uuid);
+    //subscribe
+    dispatch(subscribeUser(dispatch, history, uuid));
   };
   const componentProps = {
     email: email,
