@@ -23,8 +23,8 @@ const Subscribe = () => {
     publicKey: PAYSTACK_PUBLIC_KEY,
     text: "SUBSCRIBE",
     disabled: true,
-    // onSuccess: () => handleSuccess(),
-    onClose: handleSuccess,
+    onSuccess: handleSuccess,
+    onClose: null,
   };
 
   return (

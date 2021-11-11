@@ -3,6 +3,7 @@ import {
   LOGIN_USER_SUCCESSFUL,
   LOGIN_USER_FAILED,
   LOGOUT_USER,
+  SUBSCRIBE_USER,
 } from "../constants.js";
 
 export const signIn = (dispatch, email, history) => {
@@ -49,7 +50,7 @@ export const subscribeUser = (dispatch, history, uuid) => {
     if (response) {
       let result = await response.json();
       if (result.status === 200) {
-        //dispatch({ type: LOGIN_USER_SUCCESSFUL, payload: result.data });
+        dispatch({ type: SUBSCRIBE_USER });
         history.push("/create.invoice");
       }
     }

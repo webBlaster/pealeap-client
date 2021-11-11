@@ -2,6 +2,7 @@ import {
   LOGIN_USER_SUCCESSFUL,
   LOGIN_USER_FAILED,
   LOGOUT_USER,
+  SUBSCRIBE_USER,
 } from "../constants.js";
 
 const initialState = {
@@ -26,6 +27,10 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT_USER:
       return Object.assign({}, state, {
         isAuthenticated: false,
+      });
+    case SUBSCRIBE_USER:
+      return Object.assign({}, state, {
+        subscribed: true,
       });
 
     default:
