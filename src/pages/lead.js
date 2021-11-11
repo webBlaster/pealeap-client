@@ -13,15 +13,33 @@ import {
 
 import { getLead, updateLeadToMarked } from "../actions/leads";
 import { getProfile } from "../actions/settings.js";
+import { copyText } from "../utils.js";
 
 const Lead = () => {
   const [lead, setLead] = useState(null);
   const [profile, setProfile] = useState();
+  const [copied, setCopied] = useState({ message: false, number: false });
   let uuid = useParams().uuid;
   let useruuid = useSelector((state) => state.userAuth.uuid);
 
+  let message = ` Hi, ${lead?.name}, your friend, ${lead?.friendsName} (+234 ${lead?.friendsNumber}), just gifted
+  you with a 5% discount, off your next order with us -
+  ${profile?.name}. You can contact ${profile?.name} on +234${profile?.phoneNumber} to
+  place an order, and use the Pealeap Code ${lead?.couponCode} when checking out.`;
+
   const handleClick = () => {
     updateLeadToMarked(uuid);
+  };
+
+  const copyNumber = () => {
+    let number = lead?.number;
+    copyText(number);
+    setCopied({ ...copied, number: true });
+  };
+
+  const copyMessage = () => {
+    copyText(message);
+    setCopied({ ...copied, message: true });
   };
 
   useEffect(
@@ -41,17 +59,12 @@ const Lead = () => {
           <p>Customer’s No.</p>
           <span>
             <h4>+234 {lead?.number}</h4>
-            <img src={copy} alt="copy" />
+            <img src={copy} alt="copy" onClick={copyNumber} />
           </span>
         </CustomerNumber>
         <Message>
-          <p>
-            {` Hi, ${lead?.name}, your friend, ${lead?.friendsName} (+234 ${lead?.friendsNumber}), just gifted
-            you with a 5% discount, off your next order with us -
-            ${profile?.name}. You can contact ${profile?.name} on +234${profile?.phoneNumber} to
-            place an order; and use the Pealeap Code ${lead?.couponCode} when checking out.`}
-          </p>
-          <img src={copy} alt="copy" />
+          <p>{message}</p>
+          <img src={copy} alt="copy" onClick={copyMessage} />
         </Message>
 
         <Hint>Copy and Share this message with the Customer</Hint>
@@ -63,6 +76,8 @@ const Lead = () => {
         ) : (
           <Submit text="Marked" />
         )}
+        {copied.number ? <p>Number Copied!</p> : null}
+        {copied.message ? <p>Message Copied!</p> : null}
       </Container>
     </>
   );

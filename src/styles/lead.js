@@ -5,6 +5,10 @@ export const Container = styled.div`
   margin: 0;
   color: #9a9a9a;
 
+  img {
+    cursor: pointer;
+  }
+
   @media (min-width: 800px) {
     width: 30%;
     margin: 0 auto;
