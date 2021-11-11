@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Redirect, Link, useHistory, useParams } from "react-router-dom";
 import pealeap from "../assets/pealeap.png";
 import {
   Container,
@@ -9,13 +9,18 @@ import {
   DiscountInfo,
 } from "../styles/paywall";
 
-import { getInvoice } from "../actions/invoices";
+import { getInvoice, updateInvoicePaymentStatus } from "../actions/invoices";
 import { getProfile } from "../actions/settings.js";
 
 const Paywall = () => {
   const [invoice, setInvoice] = useState({});
   const [profile, setProfile] = useState({});
   let { uuid, useruuid } = useParams();
+  const history = useHistory();
+
+  const handleClick = () => {
+    updateInvoicePaymentStatus(uuid, history);
+  };
 
   useEffect(
     () => {
@@ -26,7 +31,7 @@ const Paywall = () => {
     []
   );
 
-  return (
+  return !invoice?.paid ? (
     <>
       <Container>
         <Link to="/">
@@ -69,11 +74,12 @@ const Paywall = () => {
           <h4>You would save</h4>
           <p>NGN {invoice?.discountLevel === 0 ? "0" : ""}</p>
         </DiscountInfo>
-        <Link to="/confirmation">
-          <Button>I have made the transfer</Button>
-        </Link>
+
+        <Button onClick={handleClick}>I have made the transfer</Button>
       </Container>
     </>
+  ) : (
+    <Redirect to="/confirmation" />
   );
 };
 

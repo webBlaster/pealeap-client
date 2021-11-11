@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import InvoiceCell from "../components/invoicecell.js";
 import Submit from "../components/button.js";
 import profilecard from "../assets/profilecard.svg";
@@ -18,7 +18,7 @@ const Invoice = () => {
     // eslint-disable-next-line
     []
   );
-  return (
+  return !invoice?.paid ? (
     <>
       <Container>
         <div className="top">
@@ -47,6 +47,8 @@ const Invoice = () => {
         <h4>Powered by Pealeap</h4>
       </Container>
     </>
+  ) : (
+    <Redirect to="/confirmation" />
   );
 };
 

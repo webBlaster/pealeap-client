@@ -49,3 +49,19 @@ export const getInvoice = async (invoiceId, setInvoice) => {
     setInvoice(result.data);
   }
 };
+
+export const updateInvoicePaymentStatus = async (invoiceId, history) => {
+  const response = await fetch(API_URL + "/invoice.update.payment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ uuid: invoiceId }),
+  });
+  if (response) {
+    const result = await response.json();
+    if (result.status === 200) {
+      history.push("/confirmation");
+    }
+  }
+};

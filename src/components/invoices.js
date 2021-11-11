@@ -77,7 +77,9 @@ const Invoices = ({ invoices, filterInvoice }) => {
             invoices.map((item) => (
               <Link
                 to={
-                  item.paid ? "/paidinvoice/" : "/pendinginvoice/" + item.uuid
+                  item.paid
+                    ? "/paidinvoice/" + item.uuid
+                    : "/pendinginvoice/" + item.uuid
                 }
                 key={item.uuid}
               >

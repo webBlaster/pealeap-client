@@ -11,7 +11,7 @@ import {
   Hint,
 } from "../styles/lead.js";
 
-import { getLead } from "../actions/leads";
+import { getLead, updateLeadToMarked } from "../actions/leads";
 import { getProfile } from "../actions/settings.js";
 
 const Lead = () => {
@@ -19,6 +19,10 @@ const Lead = () => {
   const [profile, setProfile] = useState();
   let uuid = useParams().uuid;
   let useruuid = useSelector((state) => state.userAuth.uuid);
+
+  const handleClick = () => {
+    updateLeadToMarked(uuid);
+  };
 
   useEffect(
     () => {
@@ -28,6 +32,7 @@ const Lead = () => {
     // eslint-disable-next-line
     []
   );
+
   return (
     <>
       <Container>
@@ -51,7 +56,13 @@ const Lead = () => {
 
         <Hint>Copy and Share this message with the Customer</Hint>
 
-        <Submit text="Mark as Sent" />
+        {!lead?.marked ? (
+          <span onClick={handleClick}>
+            <Submit text="Mark as Sent" />
+          </span>
+        ) : (
+          <Submit text="Marked" />
+        )}
       </Container>
     </>
   );
