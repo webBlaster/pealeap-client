@@ -49,18 +49,3 @@ export const getInvoice = async (invoiceId, setInvoice) => {
     setInvoice(result.data);
   }
 };
-
-export const getPaymentDetails = async (invoiceId, useruuid, setDetails) => {
-  const response = await fetch(API_URL + "/payment.details", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ uuid: invoiceId, useruuid }),
-  });
-  if (response) {
-    const result = await response.json();
-    console.log(result);
-    setDetails(result.data);
-  }
-};

@@ -1,95 +1,50 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import copy from "../assets/copy.svg";
 import Submit from "../components/button.js";
+import {
+  Container,
+  Heading,
+  CustomerNumber,
+  Message,
+  Hint,
+} from "../styles/lead.js";
 
-const Container = styled.div`
-  padding: 5%;
-  margin: 0;
-  color: #9a9a9a;
-
-  @media (min-width: 800px) {
-    width: 30%;
-    margin: 0 auto;
-  }
-`;
-
-const Heading = styled.h4`
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: left;
-`;
-
-const CustomerNumber = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  span {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    h4 {
-      margin-right: 10px;
-    }
-  }
-`;
-
-const Message = styled.div`
-  border: 1px solid #eeeeee;
-  border-radius: 9px;
-  padding: 5%;
-  color: #9a9a9a;
-
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: left;
-
-  img {
-    margin-left: 90% !important;
-    margin: 0;
-  }
-`;
-
-const Hint = styled.p`
-  font-family: Roboto;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0em;
-  text-align: left;
-  margin-bottom: 60px;
-  margin-top: 30px;
-`;
+import { getLead } from "../actions/leads";
+import { getProfile } from "../actions/settings.js";
 
 const Lead = () => {
+  const [lead, setLead] = useState(null);
+  const [profile, setProfile] = useState();
+  let uuid = useParams().uuid;
+  let useruuid = useSelector((state) => state.userAuth.uuid);
+
+  useEffect(
+    () => {
+      getLead(uuid, setLead);
+      getProfile(useruuid, profile, setProfile);
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Container>
-        <Heading>John Doe</Heading>
+        <Heading>{lead?.name}</Heading>
         <CustomerNumber>
           <p>Customer’s No.</p>
           <span>
-            <h4>+234 7081104245</h4>
+            <h4>+234 {lead?.number}</h4>
             <img src={copy} alt="copy" />
           </span>
         </CustomerNumber>
         <Message>
           <p>
-            Hi, John Doe, your friend, Jane Doe (+2348054456643), just gifted
+            {` Hi, ${lead?.name}, your friend, ${lead?.friendsName} (+234 ${lead?.friendsNumber}), just gifted
             you with a 5% discount, off your next order with us -
-            CakesandCreams. You can contact Cakesandcreams on +2347093276654 to
-            place an order; and use the Pealeap Code xxxxxx when checking out.
+            ${profile?.name}. You can contact ${profile?.name} on +234${profile?.phoneNumber} to
+            place an order; and use the Pealeap Code ${lead?.couponCode} when checking out.`}
           </p>
           <img src={copy} alt="copy" />
         </Message>

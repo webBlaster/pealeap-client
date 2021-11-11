@@ -71,7 +71,7 @@ function App() {
         <Route path="/invoice/:uuid" exact component={Invoice} />
         <Route path="/giftfriends/:uuid" exact component={GiftFriends} />
         <PrivateRoute
-          path="/lead"
+          path="/lead/:uuid"
           exact
           isAuthenticated={isAuthenticated}
           component={Lead}
