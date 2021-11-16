@@ -31,7 +31,6 @@ const Settings = () => {
       formData.append("picture", profile?.picture, profile?.picture?.name);
     }
     dispatch(updatePicture(dispatch, formData));
-    console.log(formData);
   };
 
   const previewImage = (event) => {
@@ -52,7 +51,6 @@ const Settings = () => {
 
   const handleProfile = (event) => {
     event.preventDefault();
-    console.log(profile);
     setLoading(true);
     dispatch(updateProfile(dispatch, { ...profile, userId: uuid }, setLoading));
   };

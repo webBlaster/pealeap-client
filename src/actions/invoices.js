@@ -1,4 +1,8 @@
-import { API_URL, RESPONSE_SUCCESS_MESSAGE } from "../constants";
+import {
+  API_URL,
+  RESPONSE_SUCCESS_MESSAGE,
+  RESPONSE_ERROR_MESSAGE,
+} from "../constants";
 
 export const createInvoice = (dispatch, invoice, history) => {
   return async (dispatch) => {
@@ -64,4 +68,27 @@ export const updateInvoicePaymentStatus = async (invoiceId, history) => {
       history.push("/confirmation");
     }
   }
+};
+
+export const couponCode = (data, dispatch, setActive, setLoading) => {
+  return async (dispatch) => {
+    const response = await fetch(API_URL + "/coupon.code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response) {
+      setLoading(false);
+      setActive(false);
+      const result = await response.json();
+
+      if (result?.status !== 200) {
+        dispatch({ type: RESPONSE_ERROR_MESSAGE, payload: result.message });
+        return;
+      }
+      dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
+    }
+  };
 };
