@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import pealeap from "../assets/pealeap.png";
 import { Container, Logo, Button, AccountInfo } from "../styles/subscribe";
 import { PaystackButton } from "react-paystack";
-import { PAYSTACK_PUBLIC_KEY } from "../constants";
+import { PAYSTACK_TEST_PUBLIC_KEY } from "../constants";
 import { subscribeUser } from "../actions/auth";
 
 const Subscribe = () => {
@@ -20,7 +20,7 @@ const Subscribe = () => {
   const componentProps = {
     email: email,
     amount: 10000 * 100,
-    publicKey: PAYSTACK_PUBLIC_KEY,
+    publicKey: PAYSTACK_TEST_PUBLIC_KEY,
     text: "SUBSCRIBE",
     disabled: true,
     onSuccess: handleSuccess,
