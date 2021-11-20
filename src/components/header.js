@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import pealeap from "../assets/pealeap.png";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
+import { signOut } from "../actions/auth";
 
 const Container = styled.div`
   background: #f0fafa;
@@ -116,8 +118,14 @@ const MobileMenu = styled.ul`
 const Header = ({ title }) => {
   const [modal, setModal] = useState(true);
 
+  const dispatch = useDispatch();
+
   const toggleModal = () => {
     setModal(!modal);
+  };
+
+  const logOut = () => {
+    dispatch(signOut(dispatch));
   };
 
   return (
@@ -137,6 +145,11 @@ const Header = ({ title }) => {
             </li>
             <li>
               <Link to="/settings">Settings</Link>
+            </li>
+            <li>
+              <Link to="/" onClick={logOut}>
+                Sign Out
+              </Link>
             </li>
           </MobileMenu>
         </div>
@@ -159,7 +172,9 @@ const Header = ({ title }) => {
           <hr />
         </li>
         <li>
-          <Link to="/">Sign Out</Link>
+          <Link to="/" onClick={logOut}>
+            Sign Out
+          </Link>
         </li>
       </Menu>
     </>

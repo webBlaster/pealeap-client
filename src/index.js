@@ -6,8 +6,18 @@ import rootReducer from "./reducers/root";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
+import { getAuthInfo } from "./utils.js";
+import { LOGIN_USER_SUCCESSFUL, LOGIN_USER_FAILED } from "./constants";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
+
+// Load store with AuthInfo if available.
+let authInfo = getAuthInfo();
+if (authInfo && Object.keys(authInfo).length) {
+  store.dispatch({ type: LOGIN_USER_SUCCESSFUL, payload: authInfo });
+} else {
+  store.dispatch({ type: LOGIN_USER_FAILED });
+}
 
 ReactDOM.render(
   <React.StrictMode>
