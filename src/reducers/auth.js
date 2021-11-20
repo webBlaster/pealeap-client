@@ -4,6 +4,7 @@ import {
   LOGOUT_USER,
   SUBSCRIBE_USER,
 } from "../constants.js";
+import { storeAuthInfo } from "../utils.js";
 
 const initialState = {
   isAuthenticated: false,
@@ -16,6 +17,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_USER_SUCCESSFUL:
+      storeAuthInfo(action.payload);
       return Object.assign({}, state, {
         isAuthenticated: true,
         ...action.payload,

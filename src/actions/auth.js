@@ -5,6 +5,7 @@ import {
   LOGOUT_USER,
   SUBSCRIBE_USER,
 } from "../constants.js";
+import { clearAuthInfo } from "../utils.js";
 
 export const signIn = (dispatch, email, history) => {
   return async (dispatch) => {
@@ -29,10 +30,10 @@ export const signIn = (dispatch, email, history) => {
   };
 };
 
-export const signOut = (dispatch, history) => {
+export const signOut = (dispatch) => {
   return (dispatch) => {
     dispatch({ type: LOGOUT_USER });
-    history.push("/");
+    clearAuthInfo();
   };
 };
 

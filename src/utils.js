@@ -1,3 +1,26 @@
+let localStorage = window.localStorage;
+
+export function storeAuthInfo(authInfo) {
+  localStorage.setItem("authInfo", JSON.stringify(authInfo));
+}
+
+export function getAuthInfo() {
+  let authInfo = localStorage.getItem("authInfo");
+  if (authInfo) {
+    try {
+      authInfo = JSON.parse(authInfo);
+    } catch (e) {
+      authInfo = {};
+    }
+  }
+
+  return authInfo;
+}
+
+export function clearAuthInfo() {
+  localStorage.removeItem("authInfo");
+}
+
 export const copyText = (text) => {
   const el = document.createElement("textarea");
   el.value = text;
