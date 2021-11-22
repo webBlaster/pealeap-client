@@ -22,6 +22,11 @@ const Paywall = () => {
     updateInvoicePaymentStatus(uuid, history);
   };
 
+  let discount =
+    invoice?.discountLevel > 0
+      ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
+      : 0;
+
   useEffect(
     () => {
       getInvoice(uuid, setInvoice);
@@ -65,14 +70,14 @@ const Paywall = () => {
               <span>
                 <h4>Amount</h4>
                 <br />
-                <p>NGN {invoice?.amount}</p>
+                <p>NGN {invoice?.amount - discount}</p>
               </span>
             </li>
           </ul>
         </AccountInfo>
         <DiscountInfo>
           <h4>You would save</h4>
-          <p>NGN {invoice?.discountLevel === 0 ? "0" : ""}</p>
+          <p>NGN {discount}</p>
         </DiscountInfo>
 
         <Button onClick={handleClick}>I have made the transfer</Button>

@@ -31,6 +31,12 @@ const GiftFriends = () => {
     setLeads({ ...leads, [event.target.name]: event.target.value });
     console.log(leads);
   };
+
+  let discount =
+    invoice?.discountLevel > 0
+      ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
+      : 0;
+
   useEffect(
     () => {
       getInvoice(uuid, setInvoice);
@@ -110,7 +116,7 @@ const GiftFriends = () => {
             <label htmlFor="agree">I agree to the Terms and Conditions</label>
           </span>
 
-          <Submit text="Proceed" />
+          <Submit text={"Pay NGN " + (invoice?.amount - discount)} />
           <Skip>
             <Link to={`/paywall/${uuid}/${invoice?.UserUuid}`}>
               Pay NGN {invoice?.amount} instead
