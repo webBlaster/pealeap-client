@@ -63,6 +63,18 @@ const Settings = () => {
     () => {
       getBankList(setBanks);
       getProfile(uuid, profile, setProfile);
+      let bankName =
+        banks?.length > 0
+          ? [
+              profile?.bankName,
+              banks.filter((item) => {
+                return item.name === profile?.bankName;
+              })[0]?.code,
+            ]
+          : "";
+      if (profile?.bankName) {
+        setProfile({ ...profile, bankName: bankName });
+      }
     },
     // eslint-disable-next-line
     []
@@ -124,11 +136,25 @@ const Settings = () => {
               as="select"
               name="bankName"
               id="bankName"
-              value={profile?.bankName}
               onChange={setProfileAttribute}
               required
             >
               <BankList banks={banks} />
+              <option
+                selected
+                value={
+                  banks?.length > 0
+                    ? [
+                        profile?.bankName,
+                        banks.filter((item) => {
+                          return item.name === profile?.bankName;
+                        })[0]?.code,
+                      ]
+                    : ""
+                }
+              >
+                {profile?.bankName}
+              </option>
             </select>
             <br />
             <label>Account Number</label>
