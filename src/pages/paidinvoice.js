@@ -10,6 +10,10 @@ import { getInvoice } from "../actions/invoices.js";
 const PaidInvoice = () => {
   const [invoice, setInvoice] = useState(null);
   let invoiceId = useParams().uuid;
+  let discount =
+    invoice?.discountLevel > 0
+      ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
+      : 0;
   useEffect(
     () => {
       getInvoice(invoiceId, setInvoice);
@@ -44,7 +48,10 @@ const PaidInvoice = () => {
         </Coupon>
 
         <Wrapper>
-          <InvoiceCell property="New Amount" value={`NGN ${invoice?.amount}`} />
+          <InvoiceCell
+            property="New Amount"
+            value={`NGN ${invoice?.amount - discount}`}
+          />
         </Wrapper>
       </Container>
     </>

@@ -51,6 +51,22 @@ const Settings = () => {
 
   const handleProfile = (event) => {
     event.preventDefault();
+    if (!profile?.bankName.includes(",")) {
+      let bankName = `${profile?.bankName},${
+        banks.filter((item) => {
+          return item.name === profile?.bankName;
+        })[0]?.code
+      }`;
+      setLoading(true);
+      dispatch(
+        updateProfile(
+          dispatch,
+          { ...profile, userId: uuid, bankName: bankName },
+          setLoading
+        )
+      );
+      return;
+    }
     setLoading(true);
     dispatch(updateProfile(dispatch, { ...profile, userId: uuid }, setLoading));
   };
@@ -63,18 +79,6 @@ const Settings = () => {
     () => {
       getBankList(setBanks);
       getProfile(uuid, profile, setProfile);
-      let bankName =
-        banks?.length > 0
-          ? [
-              profile?.bankName,
-              banks.filter((item) => {
-                return item.name === profile?.bankName;
-              })[0]?.code,
-            ]
-          : "";
-      if (profile?.bankName) {
-        setProfile({ ...profile, bankName: bankName });
-      }
     },
     // eslint-disable-next-line
     []
@@ -142,7 +146,7 @@ const Settings = () => {
               <BankList banks={banks} />
               <option
                 selected
-                value={
+                defaultValue={
                   banks?.length > 0
                     ? [
                         profile?.bankName,

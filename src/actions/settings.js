@@ -12,6 +12,9 @@ export const updateProfile = (dispatch, values, setLoading) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
+    }).catch((err) => {
+      setLoading(false);
+      console.log(err);
     });
 
     if (response) {
