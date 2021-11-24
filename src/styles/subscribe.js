@@ -40,7 +40,7 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 25%;
+  width: 136px;
 
   @media (min-width: 800px) {
     margin: 30px 0;
