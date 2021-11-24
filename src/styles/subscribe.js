@@ -5,40 +5,46 @@ export const Container = styled.div`
   padding: 5%;
   text-align: center;
   color: #838383;
+  background: #f0fafa;
 
   h3 {
     color: #838383;
     margin: 0;
     font-family: Roboto;
+    font-size: 21px;
     font-style: normal;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 18px;
+    font-weight: 900;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: center;
   }
 
   p {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: normal;
-    color: #838383;
+    color: #489f9f;
   }
 
-  .info {
+  h5 {
     font-size: 18px;
-    font-family: Roboto;
-    font-weight: normal;
-    line-height: 21px;
-    margin-top: 0 !important;
+  }
+
+  .svgs {
+    margin-bottom: 50px;
   }
 
   @media (min-width: 800px) {
-    width: 30%;
+    padding: 5% 35%;
     margin: 0 auto;
   }
 `;
 
 export const Logo = styled.img`
   width: 25%;
-  margin-bottom: 50px;
+
+  @media (min-width: 800px) {
+    margin: 30px 0;
+  }
 `;
 
 export const Button = styled.span`
@@ -47,7 +53,7 @@ export const Button = styled.span`
     outline: none;
     margin: 0 auto;
     cursor: pointer;
-    background: #489f9f;
+    background: #fbbb00;
     padding: 1% 5%;
     border-radius: 5px;
     font-size: 16px;
@@ -58,43 +64,5 @@ export const Button = styled.span`
     font-family: Poppins;
     font-style: normal;
     font-weight: bold;
-  }
-`;
-
-export const AccountInfo = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  color: #bbbbbb;
-  font-size: 16px;
-  font-weight: bold;
-
-  h4 {
-    text-align: left;
-    line-height: 0;
-  }
-
-  span {
-    line-height: 0;
-    text-align: left;
-
-    p {
-      margin-top: -2px;
-    }
-  }
-  ul {
-    width: 100%;
-    padding: 0;
-    color: #838383;
-    li {
-      height: 71px;
-      margin: 10px 0;
-      padding: 0 5%;
-      border: 1px solid #e3e3e3;
-      border-radius: 3px;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
   }
 `;

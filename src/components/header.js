@@ -159,7 +159,7 @@ const Header = ({ title }) => {
         <li className="first-menu-item">
           <img src={close} alt="close" onClick={toggleModal} />{" "}
         </li>
-        <li className="active">
+        <li>
           <Link to="/overview">Overview</Link>
         </li>
         <li>
