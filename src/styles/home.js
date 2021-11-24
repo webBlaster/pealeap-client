@@ -42,9 +42,9 @@ export const SecondSection = styled.span`
 `;
 
 export const Logo = styled.img`
-  width: 25%;
+  width: 136px;
   @media (min-width: 800px) {
-    width: 7.5%;
+    width: 136px;
     margin-left: 5%;
     margin-top: 5%;
   }

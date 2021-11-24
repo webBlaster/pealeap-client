@@ -32,14 +32,15 @@ const Container = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 100%;
+  width: 136px;
   @media (min-width: 800px) {
-    width: 50%;
+    width: 136px;
   }
 `;
 
 const MenuIcon = styled.img`
   cursor: pointer;
+  margin-top: -6px;
   @media (min-width: 800px) {
     display: none !important;
   }
