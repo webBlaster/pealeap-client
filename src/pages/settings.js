@@ -41,11 +41,15 @@ const Settings = () => {
       if (reader.readyState === 2) {
         imageRef.current.src = reader.result;
         setProfile({ ...profile, picture: event.target.files[0] });
+        setTimeout(() => {
+          imageSubmitRef.current.click();
+        }, 2000);
+        console.log(1);
       }
     };
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
-      imageSubmitRef.current.click();
+      console.log(2);
     }
   };
 
