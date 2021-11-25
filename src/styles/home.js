@@ -36,6 +36,10 @@ export const Container = styled.div`
 `;
 
 export const SecondSection = styled.span`
+  img {
+    width: 100%;
+    margin: 0;
+  }
   @media (min-width: 800px) {
     display: none;
   }
@@ -44,7 +48,7 @@ export const SecondSection = styled.span`
 export const Logo = styled.img`
   width: 136px;
   @media (min-width: 800px) {
-    width: 136px;
+    width: 166px;
     margin-left: 5%;
     margin-top: 5%;
   }
@@ -80,30 +84,6 @@ export const GoogleLogin = styled.div`
   }
 `;
 
-export const Bottom = styled.img`
-  width: 100%;
-  z-index: -1;
-  position: relative;
-  margin-bottom: -20px;
-`;
-
-export const Video = styled.div`
-  border: 1px solid #838383;
-  width: 80%;
-  height: 220px;
-  background: white;
-  margin: 0 auto;
-  margin-top: 80px;
-  margin-bottom: -160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media (min-width: 800px) {
-    width: 527px;
-    height: 460px;
-  }
-`;
-
 export const Desktop = styled.div`
   h1 {
     font-family: Poppins;
@@ -127,8 +107,8 @@ export const TopDestopSection = styled.div`
   justify-content: space-between;
   position: relative;
   z-index: 10;
-  margin-bottom: -170px;
-  padding: 5% 5%;
+  margin-top: -130px;
+  padding: 0 5%;
 
   h6 {
     color: #489f9f;
@@ -154,32 +134,12 @@ export const TopDestopSection = styled.div`
   }
 
   span {
-    margin-bottom: -200px;
-  }
-`;
-
-export const Pricing = styled.div`
-  color: #489f9f;
-  text-align: center;
-  margin-top: -120px;
-  font-family: Poppins;
-  font-size: 19px;
-  font-style: normal;
-  line-height: 29px;
-  letter-spacing: 0em;
-  text-align: center;
-
-  h5 {
-    margin: 0;
-    font-family: Poppins;
-    font-size: 19px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 29px;
-    letter-spacing: 0em;
+    h1 {
+      font-weight: 700;
+    }
   }
 
-  p {
-    margin: 0;
+  .invoice {
+    width: 50%;
   }
 `;

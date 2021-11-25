@@ -4,21 +4,16 @@ import { useHistory, Redirect } from "react-router-dom";
 import { GoogleLogin as GoogleLoginComponent } from "react-google-login";
 import { signIn } from "../actions/auth";
 import google from "../assets/google.png";
-import bottomcurve from "../assets/curvyshape.png";
-import desktopcurve from "../assets/desktopshape.svg";
+import invoice from "../assets/invoice.svg";
 import pealeap from "../assets/pealeap.png";
-import play from "../assets/play.png";
 
 import {
   Container,
   Logo,
   GoogleLogin,
   SecondSection,
-  Video,
   Desktop,
   TopDestopSection,
-  Bottom,
-  Pricing,
 } from "../styles/home.js";
 
 const Home = () => {
@@ -41,15 +36,14 @@ const Home = () => {
       <Container>
         <Logo src={pealeap} alt="pealeap logo" />
         <h1>
-          Let your customers
-          <br /> spread the word
+          Send more than
+          <br /> an Invoice
         </h1>
         <p>
-          When your customers pay through Pealeap, they automatically promote
-          your business
+          Scale with simple but powerful invoices that encourage your customers
+          to help you grow
         </p>
         <br />
-        <h6>start selling with us</h6>
 
         <GoogleLogin onClick={clickGoogleLogin}>
           <img src={google} alt="google logo" />
@@ -68,27 +62,19 @@ const Home = () => {
         />
       </Container>
       <SecondSection>
-        <Video>
-          <img src={play} alt="play button" />
-        </Video>
-        <Bottom src={bottomcurve} alt="bottom shape" />
+        <img src={invoice} alt="invoice" />
       </SecondSection>
 
       <Desktop>
         <Logo src={pealeap} alt="pealeap logo" />
         <TopDestopSection>
           <span>
-            <h1>
-              Let your customers spread <br />
-              the word
-            </h1>
+            <h1>Send more than an Invoice</h1>
             <p className="describe">
-              When your customers pay through
-              <br /> Pealeap, they automatically promote your
-              <br /> business
+              Scale with simple but powerful invoices that
+              <br /> turn customers into patrons.
             </p>
             <br />
-            <h6>start selling with us</h6>
 
             <GoogleLogin onClick={clickGoogleLogin}>
               <img src={google} alt="google logo" />
@@ -96,15 +82,8 @@ const Home = () => {
             </GoogleLogin>
           </span>
 
-          <Video>
-            <img src={play} alt="play button" />
-          </Video>
+          <img className="invoice" src={invoice} alt="invoice" />
         </TopDestopSection>
-        <Bottom src={desktopcurve} alt="bottom shape" />
-        <Pricing>
-          <h5>Pricing:</h5>
-          <p>2.5% Per Transaction</p>
-        </Pricing>
       </Desktop>
     </>
   ) : (
