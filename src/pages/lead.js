@@ -25,7 +25,7 @@ const Lead = () => {
   let message = ` Hi, ${lead?.name}, your friend, ${lead?.friendsName} (+234 ${lead?.friendsNumber}), just gifted
   you with a 5% discount, off your next order with us -
   ${profile?.name}. You can contact ${profile?.name} on +234${profile?.phoneNumber} to
-  place an order, and use the Pealeap Code ${lead?.couponCode} when checking out.`;
+  place an order, and use the Bundans Code ${lead?.couponCode} when checking out.`;
 
   const handleClick = () => {
     updateLeadToMarked(uuid);

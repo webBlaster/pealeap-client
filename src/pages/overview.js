@@ -4,9 +4,10 @@ import styled from "styled-components";
 import Header from "../components/header.js";
 import RequestPayment from "../components/requestpayment.js";
 import GreenStatsCard from "../components/greenstatscard.js";
-import profilecard from "../assets/profilecard.svg";
+import ProfileCard from "../components/profilecard.js";
 import Leads from "../components/leads.js";
 import { getAllLeads } from "../actions/leads.js";
+import { getProfile } from "../actions/settings.js";
 
 const Container = styled.div`
   text-align: center;
@@ -18,19 +19,15 @@ const Container = styled.div`
   }
 `;
 
-const ProfileCard = styled.img`
-  margin: 0;
-  margin-top: -30px;
-  background: white;
-  width: 90%;
-`;
-
 const Overview = () => {
   let [leads, setLeads] = useState([]);
+  const [profile, setProfile] = useState({});
+
   let userUuid = useSelector((state) => state.userAuth.uuid);
   useEffect(
     () => {
       getAllLeads(userUuid, leads, setLeads);
+      getProfile(userUuid, profile, setProfile);
     },
     // eslint-disable-next-line
     []
@@ -39,7 +36,12 @@ const Overview = () => {
     <>
       <Header title="Overview" />
       <Container>
-        <ProfileCard src={profilecard} alt="profile card" />
+        <ProfileCard
+          image={profile?.imageUrl}
+          name={profile?.name}
+          number={profile?.phoneNumber}
+          edit={true}
+        />
         <RequestPayment title="Request a payment" />
         <GreenStatsCard received={1000} pending={2000} />
         <Leads leads={leads} />

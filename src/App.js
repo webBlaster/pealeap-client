@@ -69,7 +69,11 @@ function App() {
           component={PendingInvoice}
         />
         <Route path="/invoice/:uuid" exact component={Invoice} />
-        <Route path="/giftfriends/:uuid" exact component={GiftFriends} />
+        <Route
+          path="/giftfriends/:uuid/:useruuid"
+          exact
+          component={GiftFriends}
+        />
         <PrivateRoute
           path="/lead/:uuid"
           exact
