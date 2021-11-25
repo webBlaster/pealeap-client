@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import pealeap from "../assets/pealeap.png";
 import debitcard from "../assets/debitcard.svg";
 import features from "../assets/features.svg";
@@ -14,6 +14,7 @@ const Subscribe = () => {
   let history = useHistory();
   let email = useSelector((state) => state.userAuth.email);
   let uuid = useSelector((state) => state.userAuth.uuid);
+  let isSubcribed = useSelector((state) => state.userAuth.subscribed);
 
   const handleSuccess = () => {
     //subscribe
@@ -29,7 +30,7 @@ const Subscribe = () => {
     onClose: null,
   };
 
-  return (
+  return !isSubcribed ? (
     <>
       <Container>
         <Link to="/">
@@ -51,6 +52,8 @@ const Subscribe = () => {
         </Button>
       </Container>
     </>
+  ) : (
+    <Redirect to="/overview" />
   );
 };
 
