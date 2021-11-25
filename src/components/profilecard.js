@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Profile = styled.div`
@@ -63,7 +64,13 @@ const ProfileCard = ({ image, name, number, edit }) => {
             <p>{number}</p>
           </div>
         </span>
-        <p>{edit ? "edit" : null}</p>
+        <p>
+          {edit ? (
+            <Link to="/settings">
+              <p>edit</p>
+            </Link>
+          ) : null}
+        </p>
       </Profile>
     </>
   );
