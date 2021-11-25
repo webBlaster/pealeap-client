@@ -25,7 +25,7 @@ const PaidInvoice = () => {
     <>
       <Container>
         <div className="top">
-          <h1>Invoice #452000</h1>
+          <h1>Invoice</h1>
           <span>
             <img src={greendot} alt="grey dot" />
             <p>Paid</p>

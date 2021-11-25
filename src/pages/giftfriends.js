@@ -11,16 +11,18 @@ import {
   Form,
   Skip,
 } from "../styles/giftfriends.js";
-
+import { getProfile } from "../actions/settings.js";
 import { getInvoice } from "../actions/invoices.js";
 import { createLeads } from "../actions/leads.js";
 
 const GiftFriends = () => {
+  const [profile, setProfile] = useState({});
   const [invoice, setInvoice] = useState({});
   const [leads, setLeads] = useState({});
   const history = useHistory();
   const dispatch = useDispatch();
   let uuid = useParams().uuid;
+  let useruuid = useParams().useruuid;
 
   const handleLeadsSubmit = (event) => {
     event.preventDefault();
@@ -32,14 +34,15 @@ const GiftFriends = () => {
     console.log(leads);
   };
 
-  let discount =
-    invoice?.discountLevel > 0
-      ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
-      : 0;
+  // let discount =
+  //   invoice?.discountLevel > 0
+  //     ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
+  //     : 0;
 
   useEffect(
     () => {
       getInvoice(uuid, setInvoice);
+      getProfile(useruuid, profile, setProfile);
     },
     // eslint-disable-next-line
     []
@@ -53,7 +56,7 @@ const GiftFriends = () => {
         <InfoCard>
           <h4>Gift two friend who may need this</h4>
           <p>
-            <b>Gift 2 friends</b> with a 5% discount each from Cakesandcream.
+            <b>Gift 2 friends</b> with a 5% discount each from {profile?.name}.
             You would also get a 5% Discount on this order.
           </p>
         </InfoCard>
@@ -116,7 +119,7 @@ const GiftFriends = () => {
             <label htmlFor="agree">I agree to the Terms and Conditions</label>
           </span>
 
-          <Submit text={"Pay NGN " + (invoice?.amount - discount)} />
+          <Submit text="Proceed" />
           <Skip>
             <Link to={`/paywall/${uuid}/${invoice?.UserUuid}`}>
               Pay NGN {invoice?.amount} instead

@@ -3,15 +3,18 @@ import { useDispatch } from "react-redux";
 import { useParams, useHistory, Redirect } from "react-router-dom";
 import InvoiceCell from "../components/invoicecell.js";
 import Submit from "../components/button.js";
-import profilecard from "../assets/profilecard.svg";
-import { Container, Note, ProfileCard } from "../styles/invoice.js";
+import ProfileCard from "../components/profilecard.js";
+import { Container, Note } from "../styles/invoice.js";
+import { getProfile } from "../actions/settings.js";
 import { getInvoice, couponCode } from "../actions/invoices.js";
 
 const Invoice = () => {
   const [invoice, setInvoice] = useState(null);
+  const [profile, setProfile] = useState({});
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
   let invoiceId = useParams().uuid;
+  let useruuid = invoice?.UserUuid;
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -36,19 +39,31 @@ const Invoice = () => {
       : 0;
   useEffect(
     () => {
-      getInvoice(invoiceId, setInvoice);
+      if (useruuid === undefined) {
+        getInvoice(invoiceId, setInvoice);
+      }
+      if (useruuid !== undefined) {
+        getProfile(useruuid, profile, setProfile);
+      }
     },
     // eslint-disable-next-line
-    []
+    [useruuid]
   );
 
   return !invoice?.paid ? (
     <>
       <Container>
         <div className="top">
-          <h1>Invoice #452000</h1>
+          <h1>Invoice</h1>
         </div>
-        <ProfileCard src={profilecard} alt="profile card" />
+        <span className="profile">
+          <ProfileCard
+            image={profile?.imageUrl}
+            name={profile?.name}
+            number={profile?.phoneNumber}
+            edit={false}
+          />
+        </span>
         <InvoiceCell property="Amount" value={"NGN" + invoice?.amount} />
         <InvoiceCell property="Name" value={invoice?.name} />
         <InvoiceCell
@@ -62,19 +77,19 @@ const Invoice = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            history.push("/giftfriends/" + invoice?.uuid);
+            history.push(`/giftfriends/${invoice?.uuid}/${invoice?.UserUuid}`);
           }}
         >
           <input
             type="text"
-            placeholder="Pealeap Code (if any)"
+            placeholder="Bundans Code (if any)"
             onChange={handleInput}
             disabled={active}
           />
           <span>{loading ? "Loading..." : null}</span>
           <Submit text={"Pay NGN " + (invoice?.amount - discount)} />
         </form>
-        <h4>Powered by Pealeap</h4>
+        <h4>Powered by Bundans</h4>
       </Container>
     </>
   ) : (

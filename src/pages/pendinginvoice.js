@@ -26,7 +26,7 @@ const PendingInvoice = () => {
     <>
       <Container>
         <div className="top">
-          <h1>Invoice #452000</h1>
+          <h1>Invoice</h1>
           <span>
             <img src={greydot} alt="grey dot" />
             <p>Pending</p>

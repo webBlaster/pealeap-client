@@ -5,6 +5,10 @@ export const Container = styled.div`
   text-align: center;
   color: #838383;
 
+  .profile {
+    width: 100% !important;
+  }
+
   h1 {
     font-family: Roboto;
     font-size: 16px;
@@ -56,10 +60,4 @@ export const Note = styled.div`
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
-`;
-
-export const ProfileCard = styled.img`
-  margin: 0;
-  background: white;
-  width: 90%;
 `;
