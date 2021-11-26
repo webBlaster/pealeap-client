@@ -5,7 +5,7 @@ import {
   LOGOUT_USER,
   SUBSCRIBE_USER,
 } from "../constants.js";
-import { clearAuthInfo } from "../utils.js";
+import { clearAuthInfo, getAuthInfo, storeAuthInfo } from "../utils.js";
 
 export const signIn = (dispatch, email, history) => {
   return async (dispatch) => {
@@ -51,6 +51,8 @@ export const subscribeUser = (dispatch, history, uuid) => {
     if (response) {
       let result = await response.json();
       if (result.status === 200) {
+        let authInfo = getAuthInfo();
+        storeAuthInfo({ ...authInfo, subscribed: true });
         dispatch({ type: SUBSCRIBE_USER });
         history.push("/create.invoice");
       }
