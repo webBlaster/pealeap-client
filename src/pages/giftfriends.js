@@ -34,10 +34,10 @@ const GiftFriends = () => {
     console.log(leads);
   };
 
-  // let discount =
-  //   invoice?.discountLevel > 0
-  //     ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
-  //     : 0;
+  let discount =
+    invoice?.discountLevel > 0
+      ? invoice?.amount * (invoice?.discountLevel === 1 ? 5 / 100 : 10 / 100)
+      : 0;
 
   useEffect(
     () => {
@@ -122,7 +122,7 @@ const GiftFriends = () => {
           <Submit text="Proceed" />
           <Skip>
             <Link to={`/paywall/${uuid}/${invoice?.UserUuid}`}>
-              Pay NGN {invoice?.amount} instead
+              Pay NGN {invoice?.amount - discount} instead
             </Link>
           </Skip>
         </Form>
