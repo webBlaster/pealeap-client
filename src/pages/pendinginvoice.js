@@ -44,7 +44,10 @@ const PendingInvoice = () => {
           <p>{invoice?.note}</p>
         </Note>
 
-        <CopyInvoice link={window.location.href} showCopied={showCopied} />
+        <CopyInvoice
+          link={`${window.location.origin}/invoice/${invoiceId}`}
+          showCopied={showCopied}
+        />
         <h5>Share this link with your customer</h5>
         <h5>{copied ? "Copied!" : ""}</h5>
       </Container>

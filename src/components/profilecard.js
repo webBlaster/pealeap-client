@@ -13,6 +13,7 @@ const Profile = styled.div`
   width: 80%;
   margin: 10px auto !important;
 
+  a,
   p {
     color: #838383;
   }
@@ -64,13 +65,7 @@ const ProfileCard = ({ image, name, number, edit }) => {
             <p>{number}</p>
           </div>
         </span>
-        <p>
-          {edit ? (
-            <Link to="/settings">
-              <p>edit</p>
-            </Link>
-          ) : null}
-        </p>
+        <p>{edit ? <Link to="/settings">edit</Link> : null}</p>
       </Profile>
     </>
   );
