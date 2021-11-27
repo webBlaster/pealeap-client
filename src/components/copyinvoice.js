@@ -51,7 +51,7 @@ const InvoiceLink = styled.div`
 
 const CopyInvoice = ({ link, showCopied }) => {
   const handleCopy = () => {
-    const url = `https://${link}`;
+    const url = `${link}`;
     copyText(url);
     showCopied();
   };

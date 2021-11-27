@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import clock from "../assets/clock.svg";
 import greenarrow from "../assets/greenarrow.svg";
+import { numberFormat } from "../utils.js";
 
 const Container = styled.div`
   background: #f0fafa;
@@ -64,11 +65,11 @@ const GreenStatsCard = ({ received, pending }) => {
         <span>
           <div>
             <h4>Received</h4>
-            <p>NGN {received}</p>
+            <p>{numberFormat(received)}</p>
           </div>
           <div>
             <h4>Pending</h4>
-            <p>NGN {pending}</p>
+            <p>{numberFormat(pending)}</p>
           </div>
         </span>
         <div className="invoice">

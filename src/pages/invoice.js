@@ -7,6 +7,7 @@ import ProfileCard from "../components/profilecard.js";
 import { Container, Note } from "../styles/invoice.js";
 import { getProfile } from "../actions/settings.js";
 import { getInvoice, couponCode } from "../actions/invoices.js";
+import { numberFormat } from "../utils.js";
 
 const Invoice = () => {
   const [invoice, setInvoice] = useState(null);
@@ -64,7 +65,7 @@ const Invoice = () => {
             edit={false}
           />
         </span>
-        <InvoiceCell property="Amount" value={"NGN" + invoice?.amount} />
+        <InvoiceCell property="Amount" value={numberFormat(invoice?.amount)} />
         <InvoiceCell property="Name" value={invoice?.name} />
         <InvoiceCell
           property="Customer’s No."
@@ -87,7 +88,7 @@ const Invoice = () => {
             disabled={active}
           />
           <span>{loading ? "Loading..." : null}</span>
-          <Submit text={"Pay NGN " + (invoice?.amount - discount)} />
+          <Submit text={"Pay " + numberFormat(invoice?.amount - discount)} />
         </form>
         <h4>Powered by Bundans</h4>
       </Container>

@@ -38,3 +38,9 @@ export const copyText = (text) => {
     document.getSelection().addRange(selected);
   }
 };
+
+export const numberFormat = (value) =>
+  new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(value);

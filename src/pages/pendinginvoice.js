@@ -5,6 +5,7 @@ import CopyInvoice from "../components/copyinvoice.js";
 import greydot from "../assets/greydot.svg";
 import { Container, Note } from "../styles/pendinginvoice.js";
 import { getInvoice } from "../actions/invoices.js";
+import { numberFormat } from "../utils.js";
 
 const PendingInvoice = () => {
   const [invoice, setInvoice] = useState(null);
@@ -32,7 +33,7 @@ const PendingInvoice = () => {
             <p>Pending</p>
           </span>
         </div>
-        <InvoiceCell property="Amount" value={"NGN" + invoice?.amount} />
+        <InvoiceCell property="Amount" value={numberFormat(invoice?.amount)} />
         <InvoiceCell property="Name" value={invoice?.name} />
         <InvoiceCell
           property="Customer’s No."
@@ -43,10 +44,7 @@ const PendingInvoice = () => {
           <p>{invoice?.note}</p>
         </Note>
 
-        <CopyInvoice
-          link={`pealeap.netlify.app/invoice/${invoiceId}`}
-          showCopied={showCopied}
-        />
+        <CopyInvoice link={window.location.href} showCopied={showCopied} />
         <h5>Share this link with your customer</h5>
         <h5>{copied ? "Copied!" : ""}</h5>
       </Container>
