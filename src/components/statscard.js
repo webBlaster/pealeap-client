@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { numberFormat } from "../utils";
 
 const Container = styled.div`
   background: white;
@@ -42,11 +43,11 @@ const StatsCard = ({ received, pending }) => {
         <span>
           <div>
             <h4>Received</h4>
-            <p>NGN {received}</p>
+            <p>{numberFormat(received)}</p>
           </div>
           <div>
             <h4>Pending</h4>
-            <p>NGN {pending}</p>
+            <p>{numberFormat(pending)}</p>
           </div>
         </span>
       </Container>
