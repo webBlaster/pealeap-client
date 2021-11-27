@@ -77,7 +77,9 @@ const GreenStatsCard = ({ received, pending }) => {
           <p>
             <Link to="/transactions">View all Invoices</Link>
           </p>
-          <img src={greenarrow} alt="forward icon" />
+          <Link to="/transactions">
+            <img src={greenarrow} alt="forward icon" />
+          </Link>
         </div>
       </Container>
     </>
