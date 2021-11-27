@@ -11,6 +11,7 @@ import {
 
 import { getInvoice, updateInvoicePaymentStatus } from "../actions/invoices";
 import { getProfile } from "../actions/settings.js";
+import { numberFormat } from "../utils";
 
 const Paywall = () => {
   const [invoice, setInvoice] = useState({});
@@ -70,14 +71,14 @@ const Paywall = () => {
               <span>
                 <h4>Amount</h4>
                 <br />
-                <p>NGN {invoice?.amount - discount}</p>
+                <p>{numberFormat(invoice?.amount - discount)}</p>
               </span>
             </li>
           </ul>
         </AccountInfo>
         <DiscountInfo>
           <h4>You would save</h4>
-          <p>NGN {discount}</p>
+          <p>{numberFormat(discount)}</p>
         </DiscountInfo>
 
         <Button onClick={handleClick}>I have made the transfer</Button>

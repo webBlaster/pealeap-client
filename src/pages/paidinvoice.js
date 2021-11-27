@@ -6,6 +6,7 @@ import greendot from "../assets/greendot.svg";
 import { Container, Note, Wrapper, Coupon } from "../styles/paidinvoice.js";
 
 import { getInvoice } from "../actions/invoices.js";
+import { numberFormat } from "../utils.js";
 
 const PaidInvoice = () => {
   const [invoice, setInvoice] = useState(null);
@@ -31,7 +32,10 @@ const PaidInvoice = () => {
             <p>Paid</p>
           </span>
         </div>
-        <InvoiceCell property="Amount" value={`NGN ${invoice?.amount}`} />
+        <InvoiceCell
+          property="Amount"
+          value={`${numberFormat(invoice?.amount)}`}
+        />
         <InvoiceCell property="Name" value={`${invoice?.name}`} />
         <InvoiceCell
           property="Customer’s No."
@@ -50,7 +54,7 @@ const PaidInvoice = () => {
         <Wrapper>
           <InvoiceCell
             property="New Amount"
-            value={`NGN ${invoice?.amount - discount}`}
+            value={numberFormat(invoice?.amount - discount)}
           />
         </Wrapper>
       </Container>

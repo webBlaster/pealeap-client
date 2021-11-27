@@ -14,6 +14,7 @@ import {
 import { getProfile } from "../actions/settings.js";
 import { getInvoice } from "../actions/invoices.js";
 import { createLeads } from "../actions/leads.js";
+import { numberFormat } from "../utils";
 
 const GiftFriends = () => {
   const [profile, setProfile] = useState({});
@@ -122,7 +123,7 @@ const GiftFriends = () => {
           <Submit text="Proceed" />
           <Skip>
             <Link to={`/paywall/${uuid}/${invoice?.UserUuid}`}>
-              Pay NGN {invoice?.amount - discount} instead
+              Pay {numberFormat(invoice?.amount - discount)} instead
             </Link>
           </Skip>
         </Form>
