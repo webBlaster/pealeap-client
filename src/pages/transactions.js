@@ -40,7 +40,7 @@ const Transactions = () => {
       <Header title="Transactions" />
       <Container>
         <RequestPayment title="Request a payment" />
-        <StatsCard received={2000} pending={2000} />
+        <StatsCard received={0} pending={0} />
         <Invoices invoices={filteredInvoice} filterInvoice={filterInvoice} />
       </Container>
     </>

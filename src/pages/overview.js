@@ -43,7 +43,7 @@ const Overview = () => {
           edit={true}
         />
         <RequestPayment title="Request a payment" />
-        <GreenStatsCard received={1000} pending={2000} />
+        <GreenStatsCard received={0} pending={0} />
         <Leads leads={leads} />
       </Container>
     </>
