@@ -70,7 +70,13 @@ export const updateInvoicePaymentStatus = async (invoiceId, history) => {
   }
 };
 
-export const couponCode = (data, dispatch, setActive, setLoading) => {
+export const couponCode = (
+  data,
+  dispatch,
+  setActive,
+  setLoading,
+  getProfile
+) => {
   return async (dispatch) => {
     const response = await fetch(API_URL + "/coupon.code", {
       method: "POST",
@@ -89,6 +95,7 @@ export const couponCode = (data, dispatch, setActive, setLoading) => {
         return;
       }
       dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
+      getProfile();
     }
   };
 };
