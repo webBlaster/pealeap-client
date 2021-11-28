@@ -28,7 +28,10 @@ const Invoice = () => {
           { code: event.target.value, invoiceId },
           dispatch,
           setActive,
-          setLoading
+          setLoading,
+          () => {
+            getProfile(useruuid, profile, setProfile);
+          }
         )
       );
     }
