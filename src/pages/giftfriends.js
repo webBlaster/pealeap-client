@@ -117,7 +117,9 @@ const GiftFriends = () => {
               value="yes"
               required
             />
-            <label htmlFor="agree">I agree to the Terms and Conditions</label>
+            <label htmlFor="agree">
+              <Link to="/terms">I agree to the Terms and Conditions</Link>
+            </label>
           </span>
 
           <Submit text="Proceed" />

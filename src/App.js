@@ -16,6 +16,7 @@ import PendingInvoice from "./pages/pendinginvoice.js";
 import Invoice from "./pages/invoice.js";
 import GiftFriends from "./pages/giftfriends.js";
 import Lead from "./pages/lead.js";
+import Terms from "./pages/terms.js";
 
 function App() {
   let isAuthenticated = useSelector((state) => state.userAuth.isAuthenticated);
@@ -24,6 +25,7 @@ function App() {
       <ResponseAlert />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/terms" exact component={Terms} />
         <PrivateRoute
           path="/subscribe"
           exact
