@@ -2,6 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 0;
+  a {
+    color: #838383;
+  }
+
+  a:hover {
+    color: black;
+    opacity: 0.8;
+  }
 
   @media (min-width: 800px) {
     width: 30%;
