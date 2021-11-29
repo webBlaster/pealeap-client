@@ -12,7 +12,7 @@ const initialState = {
   uuid: null,
   email: null,
   token: null,
-  isProfileUpdated: true,
+  isProfileUpdated: false,
 };
 
 const authReducer = (state = initialState, action) => {

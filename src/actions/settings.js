@@ -28,10 +28,11 @@ export const updateProfile = (
     if (response) {
       setLoading(false);
       let result = await response.json();
-      if (result.status) {
+      if (result.status === 200) {
         if (!isProfileUpdated) {
           //updateProfileStatus
-          dispatch(updateProfileStatus(dispatch, values.userId));
+          updateProfileStatus(dispatch, values.userId);
+          console.log("i dey work boss");
         }
         dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
       }
@@ -71,26 +72,24 @@ export const getProfile = async (userId, profile, setProfile) => {
   }
 };
 
-export const updateProfileStatus = (dispatch, uuid) => {
-  return async (dispatch) => {
-    let response = await fetch(API_URL + "/update.profile.status", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ uuid }),
-    }).catch((err) => {
-      console.log(err);
-    });
-    if (response) {
-      let result = await response.json();
-      if (result.status === 200) {
-        let authInfo = getAuthInfo();
-        storeAuthInfo({ ...authInfo, isProfileUpdated: true });
-        dispatch({ type: UPDATE_PROFILE });
-      }
+export const updateProfileStatus = async (dispatch, uuid) => {
+  let response = await fetch(API_URL + "/update.profile.status", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ uuid }),
+  }).catch((err) => {
+    console.log(err);
+  });
+  if (response) {
+    let result = await response.json();
+    if (result.status === 200) {
+      let authInfo = getAuthInfo();
+      storeAuthInfo({ ...authInfo, isProfileUpdated: true });
+      dispatch({ type: UPDATE_PROFILE });
     }
-  };
+  }
 };
 
 export const getBankList = async (setBanks) => {
