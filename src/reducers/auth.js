@@ -3,6 +3,7 @@ import {
   LOGIN_USER_FAILED,
   LOGOUT_USER,
   SUBSCRIBE_USER,
+  UPDATE_PROFILE,
 } from "../constants.js";
 import { storeAuthInfo } from "../utils.js";
 
@@ -11,7 +12,7 @@ const initialState = {
   uuid: null,
   email: null,
   token: null,
-  profile: null,
+  isProfileUpdated: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -33,6 +34,10 @@ const authReducer = (state = initialState, action) => {
     case SUBSCRIBE_USER:
       return Object.assign({}, state, {
         subscribed: true,
+      });
+    case UPDATE_PROFILE:
+      return Object.assign({}, state, {
+        isProfileUpdated: true,
       });
 
     default:
