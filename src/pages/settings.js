@@ -22,6 +22,9 @@ const Settings = () => {
   const [banks, setBanks] = useState(null);
 
   let uuid = useSelector((state) => state.userAuth.uuid);
+  let isProfileUpdated = useSelector(
+    (state) => state.userAuth.isProfileUpdated
+  );
 
   const handlePicture = (event) => {
     event.preventDefault();
@@ -44,12 +47,10 @@ const Settings = () => {
         setTimeout(() => {
           imageSubmitRef.current.click();
         }, 2000);
-        console.log(1);
       }
     };
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
-      console.log(2);
     }
   };
 
@@ -66,13 +67,21 @@ const Settings = () => {
         updateProfile(
           dispatch,
           { ...profile, userId: uuid, bankName: bankName },
-          setLoading
+          setLoading,
+          isProfileUpdated
         )
       );
       return;
     }
     setLoading(true);
-    dispatch(updateProfile(dispatch, { ...profile, userId: uuid }, setLoading));
+    dispatch(
+      updateProfile(
+        dispatch,
+        { ...profile, userId: uuid },
+        setLoading,
+        isProfileUpdated
+      )
+    );
   };
 
   const setProfileAttribute = (event) => {

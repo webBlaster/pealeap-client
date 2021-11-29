@@ -2,9 +2,17 @@ import {
   PAYSTACK_API_URL,
   API_URL,
   RESPONSE_SUCCESS_MESSAGE,
+  UPDATE_PROFILE,
 } from "../constants";
 
-export const updateProfile = (dispatch, values, setLoading) => {
+import { getAuthInfo, storeAuthInfo } from "../utils";
+
+export const updateProfile = (
+  dispatch,
+  values,
+  setLoading,
+  isProfileUpdated
+) => {
   return async (dispatch) => {
     let response = await fetch(API_URL + "/update.profile", {
       method: "POST",
@@ -21,6 +29,10 @@ export const updateProfile = (dispatch, values, setLoading) => {
       setLoading(false);
       let result = await response.json();
       if (result.status) {
+        if (!isProfileUpdated) {
+          //updateProfileStatus
+          dispatch(updateProfileStatus(dispatch, values.userId));
+        }
         dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
       }
     }
@@ -57,6 +69,28 @@ export const getProfile = async (userId, profile, setProfile) => {
     let result = await response.json();
     setProfile({ ...profile, ...result.data });
   }
+};
+
+export const updateProfileStatus = (dispatch, uuid) => {
+  return async (dispatch) => {
+    let response = await fetch(API_URL + "/update.profile.status", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uuid }),
+    }).catch((err) => {
+      console.log(err);
+    });
+    if (response) {
+      let result = await response.json();
+      if (result.status === 200) {
+        let authInfo = getAuthInfo();
+        storeAuthInfo({ ...authInfo, isProfileUpdated: true });
+        dispatch({ type: UPDATE_PROFILE });
+      }
+    }
+  };
 };
 
 export const getBankList = async (setBanks) => {

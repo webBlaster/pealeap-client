@@ -20,6 +20,9 @@ import Terms from "./pages/terms.js";
 
 function App() {
   let isAuthenticated = useSelector((state) => state.userAuth.isAuthenticated);
+  let isProfileUpdated = useSelector(
+    (state) => state.userAuth.isProfileUpdated
+  );
   return (
     <Router>
       <ResponseAlert />
@@ -29,30 +32,35 @@ function App() {
         <PrivateRoute
           path="/subscribe"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={Subscribe}
         />
         <PrivateRoute
           path="/overview"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={Overview}
         />
         <PrivateRoute
           path="/settings"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={Settings}
         />
         <PrivateRoute
           path="/transactions"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={Transactions}
         />
         <PrivateRoute
           path="/create.invoice"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={CreateInvoice}
         />
@@ -61,12 +69,14 @@ function App() {
         <PrivateRoute
           path="/paidinvoice/:uuid"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={PaidInvoice}
         />
         <PrivateRoute
           path="/pendinginvoice/:uuid"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={PendingInvoice}
         />
@@ -79,10 +89,11 @@ function App() {
         <PrivateRoute
           path="/lead/:uuid"
           exact
+          isProfileUpdated={isProfileUpdated}
           isAuthenticated={isAuthenticated}
           component={Lead}
         />
-        <PrivateRoute component={Home} />
+        <Route component={Home} />
       </Switch>
     </Router>
   );
