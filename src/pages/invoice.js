@@ -30,7 +30,7 @@ const Invoice = () => {
           setActive,
           setLoading,
           () => {
-            getProfile(useruuid, profile, setProfile);
+            getInvoice(invoiceId, setInvoice);
           }
         )
       );
