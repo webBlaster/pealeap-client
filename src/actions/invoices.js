@@ -75,7 +75,7 @@ export const couponCode = (
   dispatch,
   setActive,
   setLoading,
-  getProfile
+  getInvoice
 ) => {
   return async (dispatch) => {
     const response = await fetch(API_URL + "/coupon.code", {
@@ -95,7 +95,7 @@ export const couponCode = (
         return;
       }
       dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
-      getProfile();
+      getInvoice();
     }
   };
 };
