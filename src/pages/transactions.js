@@ -5,7 +5,7 @@ import Header from "../components/header.js";
 import StatsCard from "../components/statscard.js";
 import Invoices from "../components/invoices.js";
 import RequestPayment from "../components/requestpayment.js";
-import { getAllInvoice } from "../actions/invoices.js";
+import { getAllInvoice, getInvoiceTotals } from "../actions/invoices.js";
 
 const Container = styled.div`
   text-align: center;
@@ -23,6 +23,7 @@ const Container = styled.div`
 const Transactions = () => {
   const [invoices, setInvoices] = useState([]);
   let [paid, setPaid] = useState(false);
+  const [stats, setStats] = useState({ paid: 0, pending: 0 });
   let filteredInvoice = invoices.filter((item) => item.paid === paid);
   let userId = useSelector((state) => state.userAuth.uuid);
   const filterInvoice = () => {
@@ -31,16 +32,18 @@ const Transactions = () => {
   useEffect(
     () => {
       getAllInvoice(userId, invoices, setInvoices);
+      getInvoiceTotals(userId, setStats);
     },
     // eslint-disable-next-line
     []
   );
+
   return (
     <>
       <Header title="Transactions" />
       <Container>
         <RequestPayment title="Request a payment" />
-        <StatsCard received={0} pending={0} />
+        <StatsCard received={stats.paid} pending={stats.pending} />
         <Invoices invoices={filteredInvoice} filterInvoice={filterInvoice} />
       </Container>
     </>

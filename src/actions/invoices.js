@@ -40,6 +40,23 @@ export const getAllInvoice = async (userId, invoices, setInvoices) => {
   }
 };
 
+export const getInvoiceTotals = async (uuid, setStats) => {
+  const response = await fetch(API_URL + "/invoice.totals", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ uuid }),
+  });
+  if (response) {
+    const result = await response.json();
+    if (result.status) {
+      let { paid, pending } = result.data;
+      setStats({ paid, pending });
+    }
+  }
+};
+
 export const getInvoice = async (invoiceId, setInvoice) => {
   const response = await fetch(API_URL + "/invoice", {
     method: "POST",

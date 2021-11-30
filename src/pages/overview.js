@@ -8,6 +8,7 @@ import ProfileCard from "../components/profilecard.js";
 import Leads from "../components/leads.js";
 import { getAllLeads } from "../actions/leads.js";
 import { getProfile } from "../actions/settings.js";
+import { getInvoiceTotals } from "../actions/invoices.js";
 
 const Container = styled.div`
   text-align: center;
@@ -21,17 +22,20 @@ const Container = styled.div`
 
 const Overview = () => {
   let [leads, setLeads] = useState([]);
+  const [stats, setStats] = useState({ paid: 0, pending: 0 });
   const [profile, setProfile] = useState({});
 
   let userUuid = useSelector((state) => state.userAuth.uuid);
   useEffect(
     () => {
+      getInvoiceTotals(userUuid, setStats);
       getAllLeads(userUuid, leads, setLeads);
       getProfile(userUuid, profile, setProfile);
     },
     // eslint-disable-next-line
     []
   );
+  let { paid, pending } = stats;
   return (
     <>
       <Header title="Overview" />
@@ -43,7 +47,7 @@ const Overview = () => {
           edit={true}
         />
         <RequestPayment title="Request a payment" />
-        <GreenStatsCard received={0} pending={0} />
+        <GreenStatsCard received={paid} pending={pending} />
         <Leads leads={leads} />
       </Container>
     </>
