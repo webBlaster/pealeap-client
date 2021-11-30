@@ -6,7 +6,7 @@ import debitcard from "../assets/debitcard.svg";
 import features from "../assets/features.svg";
 import { Container, Logo, Button } from "../styles/subscribe";
 import { PaystackButton } from "react-paystack";
-import { PAYSTACK_TEST_PUBLIC_KEY } from "../constants";
+import { PAYSTACK_PUBLIC_KEY } from "../constants";
 import { subscribeUser } from "../actions/auth";
 
 const Subscribe = () => {
@@ -23,7 +23,7 @@ const Subscribe = () => {
   const componentProps = {
     email: email,
     amount: 10000 * 100,
-    publicKey: PAYSTACK_TEST_PUBLIC_KEY,
+    publicKey: PAYSTACK_PUBLIC_KEY,
     text: "Proceed",
     disabled: true,
     onSuccess: handleSuccess,
