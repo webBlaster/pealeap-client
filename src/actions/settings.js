@@ -32,7 +32,6 @@ export const updateProfile = (
         if (!isProfileUpdated) {
           //updateProfileStatus
           updateProfileStatus(dispatch, values.userId);
-          console.log("i dey work boss");
         }
         dispatch({ type: RESPONSE_SUCCESS_MESSAGE, payload: result.message });
       }
