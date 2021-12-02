@@ -58,6 +58,8 @@ export const Logo = styled.img`
 export const GoogleLogin = styled.div`
   width: 70%;
   margin: 0 auto;
+  position: relative;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
