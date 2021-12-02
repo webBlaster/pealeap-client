@@ -9,7 +9,7 @@ const CreateInvoice = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let uuid = useSelector((state) => state.userAuth.uuid);
-  let isSubcribed = useSelector((state) => state.userAuth.subscribed);
+  let isSubcribed = true;
   const [invoice, setInvoice] = useState({ userId: uuid });
 
   const handleAttribute = (event) => {
