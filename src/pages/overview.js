@@ -13,10 +13,28 @@ import { getInvoiceTotals } from "../actions/invoices.js";
 const Container = styled.div`
   text-align: center;
   margin: 0;
+  padding-top: 20px;
+  margin-bottom: -100px !important;
+  background: white;
 
   @media (min-width: 800px) {
     width: 30%;
     margin: 0 auto;
+    padding-top: 0;
+  }
+`;
+
+const HeaderContainer = styled.div`
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  margin-bottom: -60px;
+  overflow: hidden;
+
+  @media (min-width: 800px) {
+    margin: 0 auto;
+    padding-top: 0;
+    margin-bottom: 0;
   }
 `;
 
@@ -38,7 +56,9 @@ const Overview = () => {
   let { paid, pending } = stats;
   return (
     <>
-      <Header title="Overview" />
+      <HeaderContainer>
+        <Header title="Overview" />
+      </HeaderContainer>
       <Container>
         <ProfileCard
           image={profile?.imageUrl}

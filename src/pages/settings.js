@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Submit from "../components/button.js";
 import Header from "../components/header.js";
 import BankList from "../components/banklist.js";
-import { MainContainer, Container, CircleLogo } from "../styles/settings.js";
+import {
+  MainContainer,
+  Container,
+  CircleLogo,
+  PayoutTitle,
+} from "../styles/settings.js";
 import {
   getBankList,
   getProfile,
@@ -147,6 +152,12 @@ const Settings = () => {
               required
             />
             <br />
+            <PayoutTitle>
+              <p>Payout Details</p>
+              <div>
+                <hr />
+              </div>
+            </PayoutTitle>
             <label htmlFor="bankName">Bank Name</label>
             <br />
             <select

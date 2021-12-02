@@ -78,3 +78,21 @@ export const CircleLogo = styled.div`
     display: none;
   }
 `;
+
+export const PayoutTitle = styled.span`
+  display: flex;
+  align-items: center;
+  p {
+    width: 37%;
+  }
+  div {
+    width: 63%;
+    margin: 0;
+    padding: 0;
+
+    hr {
+      border: 1px solid #838383;
+      opacity: 0.7;
+    }
+  }
+`;
