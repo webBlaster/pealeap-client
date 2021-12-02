@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Button = styled.button`
   color: white;
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: space-between;
   background: #489f9f;
