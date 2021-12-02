@@ -39,6 +39,7 @@ export const SecondSection = styled.span`
   img {
     width: 100%;
     margin: 0;
+    margin-top: -60px;
   }
   @media (min-width: 800px) {
     display: none;
