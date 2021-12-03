@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, Redirect } from "react-router-dom";
-import pealeap from "../assets/pealeap.png";
+import pealeap from "../assets/pealeap.svg";
 import debitcard from "../assets/debitcard.svg";
 import features from "../assets/features.svg";
 import { Container, Logo, Button } from "../styles/subscribe";
