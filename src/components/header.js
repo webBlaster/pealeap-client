@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import pealeap from "../assets/pealeap.png";
+import pealeap from "../assets/pealeap.svg";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
 import { signOut } from "../actions/auth";

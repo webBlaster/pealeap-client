@@ -5,7 +5,7 @@ import { GoogleLogin as GoogleLoginComponent } from "react-google-login";
 import { signIn } from "../actions/auth";
 import google from "../assets/google.png";
 import invoice from "../assets/invoice.svg";
-import pealeap from "../assets/pealeap.png";
+import pealeap from "../assets/pealeap.svg";
 
 import {
   Container,
