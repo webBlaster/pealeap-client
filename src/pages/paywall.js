@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Link, useHistory, useParams } from "react-router-dom";
-import pealeap from "../assets/pealeap.png";
+import pealeap from "../assets/pealeap.svg";
 import {
   Container,
   Logo,
