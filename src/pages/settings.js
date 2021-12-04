@@ -129,7 +129,7 @@ const Settings = () => {
             </form>
           </CircleLogo>
           <form onSubmit={handleProfile}>
-            <label>Merchants Name</label>
+            <label>Business Name</label>
             <br />
             <input
               type="text"
