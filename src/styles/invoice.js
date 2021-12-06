@@ -60,4 +60,7 @@ export const Note = styled.div`
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
+  .note {
+    white-space: pre-wrap;
+  }
 `;
