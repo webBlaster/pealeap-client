@@ -76,7 +76,7 @@ const Invoice = () => {
         />
         <Note>
           <p>Note</p>
-          <p>{invoice?.note}</p>
+          <p className="note">{invoice?.note}</p>
         </Note>
         <form
           onSubmit={(event) => {
