@@ -145,7 +145,7 @@ const Settings = () => {
             <input
               type="tel"
               pattern="[0-9]{11}"
-              placeholder="080851*****"
+              placeholder="0808519****"
               name="phoneNumber"
               value={profile?.phoneNumber}
               onChange={setProfileAttribute}
